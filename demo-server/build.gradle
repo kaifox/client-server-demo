@@ -1,0 +1,10 @@
+dependencies {
+
+    compile project(":demo-commons")
+
+    compile group: 'io.github.ossgang', name: 'ossgang-properties-web-server', version: "+"
+
+    compile group: 'com.google.guava', name: 'guava', version: guavaVersion
+
+
+}
