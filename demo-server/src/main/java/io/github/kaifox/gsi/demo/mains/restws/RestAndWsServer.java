@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import({TuneBaseConfiguration.class, PrintTuneConfiguration.class})
+@Import({TuneBaseConfiguration.class})
 public class RestAndWsServer {
 
     public static void main(String... args) {
