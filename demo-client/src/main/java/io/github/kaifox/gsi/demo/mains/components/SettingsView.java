@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import java.awt.image.BufferStrategy;
 
 public class SettingsView extends BorderPane {
 
@@ -21,13 +22,11 @@ public class SettingsView extends BorderPane {
 
     @PostConstruct
     public void init() {
-
         TextField textField = new TextField();
         textField.setText("0.0");
 
-        Button sendButton = new Button("Set");
-
-        sendButton.setOnAction(evt -> {
+        Button setButton = new Button("Set");
+        setButton.setOnAction(evt -> {
             try {
                 Double val = Double.parseDouble(textField.getText());
                 tuneClient.setStandardDev(val);
@@ -36,8 +35,13 @@ public class SettingsView extends BorderPane {
             }
         });
 
+        Button getButton = new Button("Get");
+        getButton.setOnAction(evt -> {
+            double val = tuneClient.getStandardDev();
+            textField.setText(new Double(val).toString());
+        });
 
-        VBox content = new VBox(textField, sendButton);
+        VBox content = new VBox(textField, getButton, setButton);
         setCenter(new TitledPane("Standard Dev", content));
     }
 }

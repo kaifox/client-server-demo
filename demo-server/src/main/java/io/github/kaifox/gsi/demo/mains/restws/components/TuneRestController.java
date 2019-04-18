@@ -31,6 +31,11 @@ public class TuneRestController {
                 .map(l -> newTune());
     }
 
+    @GetMapping("/get/standardDev")
+    public double getTuneStandardDev() {
+        return chromaSimulator.getNoiseStandardDev();
+    }
+
     @PostMapping("/set/standardDev/{stdDev}")
     public void setTuneStandardDev(@PathVariable("stdDev") double stdDev) {
         chromaSimulator.setNoiseStandardDev(stdDev);

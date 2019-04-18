@@ -37,9 +37,20 @@ public class WebfluxTuneClient implements TuneClient {
 
     @Override
     public void setStandardDev(double standardDev) {
-        client.post().uri("/api/set/standardDev/" + standardDev).exchange().block();
+        client.post()
+                .uri("/api/set/standardDev/" + standardDev)
+                .exchange()
+                .block();
     }
 
+    @Override
+    public double getStandardDev() {
+        return client.get()
+                .uri("/api/get/standardDev")
+                .retrieve()
+                .bodyToMono(Double.class)
+                .block();
+    }
 
 
 }

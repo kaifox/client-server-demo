@@ -11,4 +11,6 @@ public interface TuneClient {
 
     void setStandardDev(double standardDev);
 
+    double getStandardDev();
+
 }

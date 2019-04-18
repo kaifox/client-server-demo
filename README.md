@@ -18,6 +18,7 @@ for control system components.
 
 * Good for high data rates
 * Endpoints to be known on startup
+* Some more in formation for when to use can be found in the [spring docs](https://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/websocket.html#websocket-intro-when-to-use).
 
 ### ossgang-properties
 
