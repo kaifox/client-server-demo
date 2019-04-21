@@ -9,6 +9,8 @@ public interface TuneClient {
 
     Flux<Tune> measuredTunes();
 
+    Flux<Tune> wsMeasuredTunes();
+
     void setStandardDev(double standardDev);
 
     double getStandardDev();

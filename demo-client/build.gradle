@@ -7,8 +7,13 @@ dependencies {
     compile group: 'org.minifx', name: 'minifx-workbench', version: "+"
 
     compile group: 'org.springframework', name: 'spring-web', version: springVersion
+    compile group: 'org.springframework', name: 'spring-websocket', version: springVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: springBootVersion
 //    compile group: 'org.projectreactor', name: 'reactor-spring', version: springVersion
+
+    /* This looks a bit like an overkill ... only used for the HttpServletResponse.... classes*/
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '9.0.12'
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-websocket', version: '9.0.12'
 
     compile group: 'io.github.ossgang', name: 'ossgang-properties-web-client', version: "+"
     compile group: 'com.google.guava', name: 'guava', version: guavaVersion

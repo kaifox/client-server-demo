@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 
 import static io.github.ossgang.properties.fx.util.JavaFxFlux.fxScheduler;
 
-public class FluxTunesView extends BorderPane {
+public class WsFluxTunesView extends BorderPane {
 
     @Autowired
     private TuneClient tuneClient;
@@ -19,7 +19,7 @@ public class FluxTunesView extends BorderPane {
         TextArea textArea = new TextArea();
         setCenter(textArea);
 
-        tuneClient.measuredTunes()
+        tuneClient.wsMeasuredTunes()
                 .map(t -> "received " + t + ".\n")
                 .publishOn(fxScheduler())
                 .subscribe(textArea::appendText);
