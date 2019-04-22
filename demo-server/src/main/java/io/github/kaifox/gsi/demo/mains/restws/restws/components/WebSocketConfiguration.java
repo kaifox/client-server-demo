@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.mains.restws.components;
+package io.github.kaifox.gsi.demo.mains.restws.restws.components;
 
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;

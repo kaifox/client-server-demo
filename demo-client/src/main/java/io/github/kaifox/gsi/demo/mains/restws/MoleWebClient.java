@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.mains;
+package io.github.kaifox.gsi.demo.mains.restws;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

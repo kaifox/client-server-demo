@@ -1,6 +1,6 @@
-package io.github.kaifox.gsi.demo.mains.components;
+package io.github.kaifox.gsi.demo.mains.restws.components;
 
-import io.github.kaifox.gsi.demo.mains.TuneClient;
+import io.github.kaifox.gsi.demo.mains.restws.TuneClient;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;

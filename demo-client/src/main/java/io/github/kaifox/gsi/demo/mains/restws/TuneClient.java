@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.mains;
+package io.github.kaifox.gsi.demo.mains.restws;
 
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import reactor.core.publisher.Flux;

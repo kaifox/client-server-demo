@@ -1,9 +1,9 @@
-package io.github.kaifox.gsi.demo.mains;
+package io.github.kaifox.gsi.demo.mains.restws;
 
-import io.github.kaifox.gsi.demo.mains.components.FluxTunesView;
-import io.github.kaifox.gsi.demo.mains.components.PollingTuneView;
-import io.github.kaifox.gsi.demo.mains.components.SettingsView;
-import io.github.kaifox.gsi.demo.mains.components.WsFluxTunesView;
+import io.github.kaifox.gsi.demo.mains.restws.components.FluxTunesView;
+import io.github.kaifox.gsi.demo.mains.restws.components.PollingTuneView;
+import io.github.kaifox.gsi.demo.mains.restws.components.SettingsView;
+import io.github.kaifox.gsi.demo.mains.restws.components.WsFluxTunesView;
 import javafx.scene.Node;
 import org.minifx.workbench.MiniFx;
 import org.minifx.workbench.annotations.View;

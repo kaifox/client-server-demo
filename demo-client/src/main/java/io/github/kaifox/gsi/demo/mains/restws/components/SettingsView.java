@@ -1,6 +1,6 @@
-package io.github.kaifox.gsi.demo.mains.components;
+package io.github.kaifox.gsi.demo.mains.restws.components;
 
-import io.github.kaifox.gsi.demo.mains.TuneClient;
+import io.github.kaifox.gsi.demo.mains.restws.TuneClient;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import java.awt.image.BufferStrategy;
 
 public class SettingsView extends BorderPane {
 
