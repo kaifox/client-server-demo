@@ -1,6 +1,6 @@
-package io.github.kaifox.gsi.demo.mains.components;
+package io.github.kaifox.gsi.demo.mains.restws.components;
 
-import io.github.kaifox.gsi.demo.mains.TuneClient;
+import io.github.kaifox.gsi.demo.mains.restws.TuneClient;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,7 @@ public class WsFluxTunesView extends BorderPane {
         setCenter(textArea);
 
         tuneClient.wsMeasuredTunes()
-                .map(t -> "received " + t + ".\n")
                 .publishOn(fxScheduler())
-                .subscribe(textArea::appendText);
+                .subscribe(t -> textArea.appendText("received " + t + ".\n"));
     }
 }
