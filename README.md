@@ -12,7 +12,7 @@ for control system components.
 [Server-Sent events](https://en.wikipedia.org/wiki/Server-sent_events) seem to be very useful for many applications: 
 * Works nicely out of the box. The browser shows some nice updates immediately.
 * Easy for variable number of endpoints
-* Seems to reconnect automatically (to be tested for java)
+* Seems to reconnect automatically in javascript (not in java!?)
 
 RestController method in spring would look somehow like this:
 ```java

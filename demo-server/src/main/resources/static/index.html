@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html>
+<head><title>Web UI Trials</title>
+<meta charset="utf-8" />
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script src="highcharts.js"></script>
+<style type="text/css">
+html {
+	font-family: sans-serif;
+}
+#tuneFitPlot, #momentumOffsetFitPlot {
+    display: inline-block;
+    width: 49%;
+    box-sizing: border-box;
+}
+.tab {
+	display: none;
+}
+<!-- 
+.tab:target {
+	display: block;
+}
+ -->
+.tabs {
+	background: #ccc;
+}
+.tabs li {
+	display: inline-block;
+	list-style-type: none;
+	border: 1px solid black;
+	background: #ddd;
+	padding: 5px;
+}
+ul.tabs li button {
+	color: black;
+	text-decoration: none;
+}
+</style>
+</head>
+
+
+
+<body>
+<div id="chroma" >
+	<div>
+		<button id="getTuneButton">GET</button>
+		<textarea id="tuneValue" rows="3" cols="70"></textarea>
+	</div>
+	<div>
+		<textarea id="testTune" rows="3" cols="70"></textarea>
+	</div>
+</div>
+
+<script>
+</script>
+
+<script src="ui.js"></script>
+
+</body>
+</html>
