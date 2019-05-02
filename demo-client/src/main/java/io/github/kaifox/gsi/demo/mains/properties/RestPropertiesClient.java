@@ -9,6 +9,7 @@ import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import io.github.kaifox.gsi.demo.mains.properties.components.FluxTunesView;
 import io.github.kaifox.gsi.demo.mains.properties.components.SettingsView;
 import io.github.ossgang.properties.core.JsonConversions;
+import org.minifx.fxcommons.MiniFxSceneBuilder;
 import org.minifx.workbench.MiniFx;
 import org.minifx.workbench.annotations.View;
 import org.springframework.context.annotation.Bean;
@@ -55,6 +56,11 @@ public class RestPropertiesClient {
     @Bean
     public RbacTokenProvider rbacTokenProvider() {
         return new DemoRbacTokenProvider();
+    }
+
+    @Bean
+    public MiniFxSceneBuilder miniFxSceneBuilder() {
+        return MiniFxSceneBuilder.miniFxSceneBuilder().withSize(640, 380);
     }
 
 }

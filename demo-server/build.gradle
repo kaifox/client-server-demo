@@ -9,5 +9,6 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: springBootVersion
 
+    implementation group: 'org.springframework.boot', name:'spring-boot-devtools', version: springBootVersion
 
 }

@@ -1,0 +1,116 @@
+<!doctype html>
+
+<html>
+<head><title>Chroma Server Test</title>
+<meta charset="utf-8" />
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script src="highcharts.js"></script>
+<style type="text/css">
+html {
+	font-family: sans-serif;
+}
+#tuneFitPlot, #momentumOffsetFitPlot {
+    display: inline-block;
+    width: 49%;
+    box-sizing: border-box;
+}
+.tab {
+	display: none;
+}
+<!-- 
+.tab:target {
+	display: block;
+}
+ -->
+.tabs {
+	background: #ccc;
+}
+.tabs li {
+	display: inline-block;
+	list-style-type: none;
+	border: 1px solid black;
+	background: #ddd;
+	padding: 5px;
+}
+ul.tabs li button {
+	color: black;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+<ul class="tabs">
+<li><button id="chromaButton">CHROMA</button></li>
+<li><button id="debugButton">DEBUG</button></li>
+</ul>
+
+<div id="debug" class="tab">
+<div>
+<textarea id="testTune" rows="30" cols="70"></textarea>
+<textarea id="testChroma" rows="30" cols="70"></textarea>
+</div>
+<div>
+<textarea id="testTuneVsDeltapLinearFit" rows="30" cols="70"></textarea>
+<textarea id="emty" rows="30" cols="70">Empty on purpose ;-)</textarea>
+<textarea id="testTuneFit" rows="30" cols="70"></textarea>
+<textarea id="testMomentumOffsetFit" rows="30" cols="70"></textarea>
+</div>
+
+</div>
+
+<div id="chroma" class="tab">
+<div>
+<button class="modulation" value="true">MOD ON</button>
+<button class="modulation" value="false">MOD OFF</button>
+    <span class="server-modulation-state"></span>
+</div>
+
+<fieldset class="trim" id="tuneTrim" data-trim-target="tune"><legend>Tune Trim</legend>
+<label>B1H: <input type="number" step="0.001" value="0.0" class="trimB1H" /></label>
+<label>B1V: <input type="number" step="0.001" value="0.0" class="trimB1V" /></label>
+<label>B2H: <input type="number" step="0.001" value="0.0" class="trimB2H" /></label>
+<label>B2V: <input type="number" step="0.001" value="0.0" class="trimB2V" /></label>
+<button class="apply">TRIM!</button>
+</fieldset>
+
+<fieldset class="trim" id="chromaTrim" data-trim-target="chroma"><legend>Chroma Trim</legend>
+<label>B1H: <input type="number" step="0.1" value="0.0" class="trimB1H" /></label>
+<label>B1V: <input type="number" step="0.1" value="0.0" class="trimB1V" /></label>
+<label>B2H: <input type="number" step="0.1" value="0.0" class="trimB2H" /></label>
+<label>B2V: <input type="number" step="0.1" value="0.0" class="trimB2V" /></label>
+<button class="apply">TRIM!</button>
+</fieldset>
+
+
+<div>
+<div id="tunePlot"></div>
+<div id="chromaPlot"></div>
+<div id="tuneFitPlot"></div>
+<div id="momentumOffsetFitPlot"></div>
+</div>
+
+<div>
+<div id="tuneVsDeltap"></div>
+</div>
+
+</div>
+
+<script>
+$('#chroma').show();
+
+$('#chromaButton').click(e => {
+	$('#debug').hide();
+	$('#chroma').show();
+})
+$('#debugButton').click(e => {
+	$('#debug').show();
+	$('#chroma').hide();
+})
+
+</script>
+
+<script src="chroma.js"></script>
+
+</body>
+
+</html>

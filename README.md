@@ -9,10 +9,28 @@ for control system components.
 
 ### Spring Webflux
 
-* Long polling: Works nicely out of the box. Simple on the client side...
+[Server-Sent events](https://en.wikipedia.org/wiki/Server-sent_events) seem to be very useful for many applications: 
+* Works nicely out of the box. The browser shows some nice updates immediately.
 * Easy for variable number of endpoints
+* Seems to reconnect automatically (to be tested for java)
+
+RestController method in spring would look somehow like this:
+```java
+@GetMapping(value = "/measuredTunes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+public Flux<Tune> measuredTunes() {
+    // whatever here
+}
+```
+
+The client code in javascript:
+```javascript
+var source = new EventSource("http://" + location.host + "/measuredTunes");
+source.onmessage = e => {
+    console.log(e.data);
+};
+```
+
 * High data rates?
-* Reconnection?
 
 ### Websockets
 

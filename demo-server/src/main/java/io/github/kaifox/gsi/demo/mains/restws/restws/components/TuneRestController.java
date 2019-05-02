@@ -25,7 +25,7 @@ public class TuneRestController {
     }
 
 
-    @GetMapping(value = "/measuredTunes", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    @GetMapping(value = "/measuredTunes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Tune> measuredTunes() {
         return Flux.interval(Duration.of(1, SECONDS))
                 .map(l -> newTune());

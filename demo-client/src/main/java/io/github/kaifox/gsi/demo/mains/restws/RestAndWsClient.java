@@ -5,6 +5,7 @@ import io.github.kaifox.gsi.demo.mains.restws.components.PollingTuneView;
 import io.github.kaifox.gsi.demo.mains.restws.components.SettingsView;
 import io.github.kaifox.gsi.demo.mains.restws.components.WsFluxTunesView;
 import javafx.scene.Node;
+import org.minifx.fxcommons.MiniFxSceneBuilder;
 import org.minifx.workbench.MiniFx;
 import org.minifx.workbench.annotations.View;
 import org.springframework.context.annotation.Bean;
@@ -44,5 +45,10 @@ public class RestAndWsClient {
     @Bean
     public TuneClient tuneClient() {
         return new WebfluxTuneClient();
+    }
+
+    @Bean
+    public MiniFxSceneBuilder miniFxSceneBuilder() {
+        return MiniFxSceneBuilder.miniFxSceneBuilder().withSize(640, 380);
     }
 }

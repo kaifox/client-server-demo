@@ -1,9 +1,8 @@
 package io.github.kaifox.gsi.demo.mains.properties.components;
 
 
-import cern.lhc.commons.web.property.Properties;
+import io.github.ossgang.properties.core.Properties;
 import cern.lhc.commons.web.property.RestPropertyMapping;
-import cern.lhc.commons.web.property.SimpleProperty;
 import cern.lhc.commons.web.property.StreamWebsocketMapping;
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
@@ -11,11 +10,9 @@ import io.github.ossgang.properties.core.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.server.support.WebSocketHandlerMapping;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
 import static cern.lhc.commons.web.property.RestPropertyMapping.mappingFor;
 import static java.time.temporal.ChronoUnit.SECONDS;
