@@ -15,3 +15,15 @@ source.onmessage = e => {
 };
 
 
+$('#getStandardDevButton').click(e => {
+	$.get("http://" + location.host + "/api/standardDev", msg => {
+		$('#standardDev').value = msg;
+	  });
+})
+
+$('#setStandardDevButton').click(e => {
+	v = $('#standardDev').value;
+	$.post("http://" + location.host + "/api/standardDev/" + v);
+})
+
+

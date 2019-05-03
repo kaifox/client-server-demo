@@ -9,12 +9,12 @@ for control system components.
 
 ### Spring Webflux
 
-[Server-Sent events](https://en.wikipedia.org/wiki/Server-sent_events) seem to be very useful for many applications: 
+[Server-Sent events](https://en.wikipedia.org/wiki/Server-sent_events) (specification [here](https://www.w3.org/TR/eventsource)) seem to be very useful for many applications: 
 * Works nicely out of the box. The browser shows some nice updates immediately.
 * Easy for variable number of endpoints
 * Seems to reconnect automatically in javascript (not in java!?)
 
-RestController method in spring would look somehow like this:
+A RestController method in spring would look somehow like this:
 ```java
 @GetMapping(value = "/measuredTunes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 public Flux<Tune> measuredTunes() {

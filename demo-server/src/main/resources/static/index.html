@@ -44,12 +44,26 @@ ul.tabs li button {
 <body>
 <div id="chroma" >
 	<div>
-		<button id="getTuneButton">GET</button>
-		<textarea id="tuneValue" rows="3" cols="70"></textarea>
+		<fieldset>
+			<legend>Pure REST (polling) tune</legend>
+			<button id="getTuneButton">GET</button>
+			<textarea id="tuneValue" rows="3" cols="70"></textarea>
+		</fieldset>
 	</div>
 	<div>
-		<textarea id="testTune" rows="3" cols="70"></textarea>
+		<fieldset>
+			<legend>SSE tune</legend>
+			<textarea id="testTune" rows="3" cols="70"></textarea>
+		</fieldset>
 	</div>
+	<div>
+			<fieldset>
+				<legend>GET/SET standard Dev</legend>
+				<button id="getStandardDevButton">GET</button>
+				<button id="setStandardDevButton">SET</button>
+				<input type="standardDev" step="0.001" value="0.0" class="trimB1H" />
+			</fieldset>
+		</div>
 </div>
 
 <script>
