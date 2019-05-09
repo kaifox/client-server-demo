@@ -5,7 +5,54 @@ for control system components.
 
 ### Pure REST
 
-* - No notification possible
+* No notification possible
+
+Example Code for the RestController:
+```java
+// Fro gets
+@GetMapping("/standardDev")
+public double getTuneStandardDev() {
+// whatsoever
+}
+
+// for posts
+@PostMapping("/standardDev/{stdDev}")
+public void setTuneStandardDev(@PathVariable("stdDev") double stdDev) {
+    //whatsoever
+}
+```
+
+Simplistic java client code (using spring 5 web client):
+
+```java
+private final WebClient client = WebClient.create("http://" + BASE_URI);
+
+// getting from the server
+public double getStandardDev() {
+    return client.get()
+        .uri("/standardDev")
+        .retrieve()
+        .bodyToMono(Double.class)
+        .block();
+}
+
+// setting to the server (through POST)
+@Override
+public void setStandardDev(double standardDev) {
+    client.post()
+       .uri("/standardDev/" + standardDev)
+       .exchange()
+       .block();
+}
+
+```
+
+Example Client code in javascript (using jquery):
+```javascript
+$.get("http://" + location.host + "/standardDev", msg => {
+		console.log(msg);
+    });
+```
 
 ### Spring Webflux
 
@@ -22,6 +69,19 @@ public Flux<Tune> measuredTunes() {
 }
 ```
 
+Simplistic (neglecting error handling, stream sharing etc) client code in Java:
+```java
+
+ private final WebClient client = WebClient.create("http://" + BASE_URI);
+
+ public Flux<Tune> measuredTunes() {
+     return client.get()
+           .uri("/measuredTunes")
+           .retrieve()
+           .bodyToFlux(Tune.class);
+ }
+```
+
 The client code in javascript:
 ```javascript
 var source = new EventSource("http://" + location.host + "/measuredTunes");
@@ -30,15 +90,18 @@ source.onmessage = e => {
 };
 ```
 
+Open Questions:
 * High data rates?
 
 ### Websockets
 
 * Good for high data rates
 * Endpoints to be known on startup
+* Do not reconnect automatically.
 * Some more in formation for when to use can be found in the [spring docs](https://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/websocket.html#websocket-intro-when-to-use).
 
 ### ossgang-properties
 
 * combines REST + websockets.
 * particularly useful when setable and getable
+* Potentially an interesting combination could be REST + SSE.

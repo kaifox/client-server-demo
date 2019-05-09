@@ -20,10 +20,8 @@ $('#getTuneButton').click(e => {
 
 var source = new EventSource("http://" + location.host + "/api/measuredTunes");
 source.onmessage = e => {
-		$('#testTune').text(e.data);
+		$('#testTune').text('from SSE: ' + e.data);
 };
-
-
 
 
 /**
@@ -46,5 +44,14 @@ $('#setStandardDevButton').click(e => {
 	v = $('#standardDevInput').val();
 	$.post("http://" + location.host + "/api/standardDev/" + v);
 })
+
+/**
+ * The following subscribes to websockets on the server.
+ */
+
+var wsTune = new WebSocket("ws://"+location.host+"/ws/measuredTunes");
+wsTune.onmessage = (msg) => {
+    $('#wsTune').text('from WS: ' + msg.data);
+}
 
 
