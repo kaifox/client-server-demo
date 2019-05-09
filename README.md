@@ -100,6 +100,43 @@ Open Questions:
 * Do not reconnect automatically.
 * Some more in formation for when to use can be found in the [spring docs](https://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/websocket.html#websocket-intro-when-to-use).
 
+Spring server configuration:
+[WebSocketConfiguration.java](src/main/java/io/github/kaifox/gsi/demo/mains/restws/restws/components/WebSocketConfiguration.java)
+
+Java Client Code
+```java
+ @Override
+    public Flux<Tune> wsMeasuredTunes() {
+        StringFluxWsHandler handler = new StringFluxWsHandler();
+        wsClient.doHandshake(handler, "ws://" + BASE_URI + "/ws/measuredTunes");
+        // set message size limits to 1 MB ?
+        return handler.flux()
+                .map(v -> defaultDeserialization(v, Tune.class));
+    }
+    
+    private class StringFluxWsHandler extends TextWebSocketHandler {
+            private final ReplayProcessor<String> sink = ReplayProcessor.cacheLast();
+            private final Flux<String> stream = sink.publishOn(Schedulers.elastic());
+    
+            public Flux<String> flux() {
+                return this.stream;
+            }
+    
+            @Override
+            protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+                sink.onNext(message.getPayload());
+            }
+        }
+``` 
+
+Client Code in JavaScript:
+```javascript
+var wsTune = new WebSocket("ws://"+location.host+"/ws/measuredTunes");
+wsTune.onmessage = (msg) => {
+    console.log(msg.data);
+}
+```
+
 ### ossgang-properties
 
 * combines REST + websockets.
