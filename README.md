@@ -101,7 +101,7 @@ Open Questions:
 * Some more in formation for when to use can be found in the [spring docs](https://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/websocket.html#websocket-intro-when-to-use).
 
 Spring server configuration:
-[WebSocketConfiguration.java](src/main/java/io/github/kaifox/gsi/demo/mains/restws/restws/components/WebSocketConfiguration.java)
+[WebSocketConfiguration.java](demo-server/src/main/java/io/github/kaifox/gsi/demo/mains/restws/restws/components/WebSocketConfiguration.java)
 
 Java Client Code
 ```java
