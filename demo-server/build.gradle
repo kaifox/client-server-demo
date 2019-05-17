@@ -1,5 +1,4 @@
 dependencies {
-
     compile project(":demo-commons")
 
     compile group: 'io.github.ossgang', name: 'ossgang-properties-web-server', version: "+"
@@ -11,4 +10,6 @@ dependencies {
 
     implementation group: 'org.springframework.boot', name:'spring-boot-devtools', version: springBootVersion
 
+
 }
+

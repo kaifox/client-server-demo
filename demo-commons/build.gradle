@@ -1,6 +1,25 @@
+apply plugin: 'com.google.protobuf'
+
 dependencies {
 
     compile group: 'com.google.guava', name: 'guava', version: guavaVersion
 
+    /*
+    For grpc
+     */
+    compile group: 'io.grpc', name: 'grpc-protobuf', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-stub', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-all', version: grpcVersion
+    //compileOnly group: 'javax.annotation', name: 'javax.annotation-api', version: '1.2'
 
+}
+
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:${protocVersion}" }
+    plugins {
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}" }
+    }
+    generateProtoTasks {
+        all()*.plugins { grpc {} }
+    }
 }

@@ -1,0 +1,35 @@
+syntax = "proto3"; // details see https://developers.google.com/protocol-buffers/docs/proto3
+
+option java_multiple_files = true;
+option java_package = "de.gsi.demoservice.grpc";
+option java_outer_classname = "DemoProto";
+
+package demo;
+
+service TuneService {
+
+    rpc GetMeasuredTune (MeasuredTuneRequest) returns (MeasuredTuneReply) {}
+    rpc GetMeasuredTunes (MeasuredTuneRequest) returns (stream MeasuredTuneReply) {}
+    rpc GetStandardDev (StandardDevRequest) returns (StandardDevReply) {}
+    rpc SetStandardDev (StandardDevRequest) returns (StandardDevReply) {}
+}
+
+
+// Requests
+
+message MeasuredTuneRequest {}
+
+message StandardDevRequest {
+    double std_dev = 1;
+}
+
+// Replies
+
+message MeasuredTuneReply {
+    double value = 1;
+    double error = 2;
+}
+
+message StandardDevReply {
+    double std_dev = 1;
+}
