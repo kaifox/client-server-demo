@@ -1,6 +1,7 @@
-package io.github.kaifox.gsi.demo.mains.restws.restws.components;
+package io.github.kaifox.gsi.demo.mains.restws.components;
 
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
+import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import io.github.ossgang.properties.core.JsonConversions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 public class WebSocketConfiguration implements WebSocketConfigurer {
 
     @Autowired
-    private ChromaSimulator chromaSimulator;
+    private PublicationSimulator<Tune> publicationSimulator;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -33,8 +34,7 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
     private class TuneWebSocketHandler extends TextWebSocketHandler {
         @Override
         public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-            Flux.interval(Duration.of(1, SECONDS))
-                    .map(l -> newTune())
+            publicationSimulator.flux()
                     .map(JsonConversions::defaultSerialization)
                     .subscribe(v -> sendMessage(session, v));
         }
@@ -48,7 +48,4 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
         }
     }
 
-    private Tune newTune() {
-        return new Tune(chromaSimulator.actualTune(), chromaSimulator.getNoiseStandardDev());
-    }
 }

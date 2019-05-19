@@ -1,6 +1,7 @@
-package io.github.kaifox.gsi.demo.mains.restws.restws.components;
+package io.github.kaifox.gsi.demo.mains.restws.components;
 
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
+import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,16 +20,17 @@ public class TuneRestController {
     @Autowired
     private ChromaSimulator chromaSimulator;
 
+    @Autowired
+    private PublicationSimulator<Tune> publicationSimulator;
+
     @GetMapping("/measuredTune")
     public Tune measuredTune() {
-        return newTune();
+        return publicationSimulator.latest();
     }
-
 
     @GetMapping(value = "/measuredTunes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Tune> measuredTunes() {
-        return Flux.interval(Duration.of(1, SECONDS))
-                .map(l -> newTune());
+        return publicationSimulator.flux();
     }
 
     @GetMapping("/standardDev")
@@ -40,10 +42,5 @@ public class TuneRestController {
     public void setTuneStandardDev(@PathVariable("stdDev") double stdDev) {
         chromaSimulator.setNoiseStandardDev(stdDev);
     }
-
-    private Tune newTune() {
-        return new Tune(chromaSimulator.actualTune(), chromaSimulator.getNoiseStandardDev());
-    }
-
 
 }

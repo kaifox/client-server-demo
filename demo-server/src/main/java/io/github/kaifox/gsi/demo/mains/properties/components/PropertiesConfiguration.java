@@ -1,6 +1,7 @@
 package io.github.kaifox.gsi.demo.mains.properties.components;
 
 
+import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
 import io.github.ossgang.properties.core.Properties;
 import cern.lhc.commons.web.property.RestPropertyMapping;
 import cern.lhc.commons.web.property.StreamWebsocketMapping;
@@ -23,6 +24,9 @@ public class PropertiesConfiguration {
     @Autowired
     private ChromaSimulator chromaSimulator;
 
+    @Autowired
+    private PublicationSimulator<Tune> publicationSimulator;
+
     @Bean
     public RestPropertyMapping<Double> standardDeviationPropertyMapping() {
         Property<Double> stdDevProperty = Properties.doubleProperty(chromaSimulator.getNoiseStandardDev());
@@ -32,15 +36,7 @@ public class PropertiesConfiguration {
 
     @Bean
     public StreamWebsocketMapping<Tune> tunes() {
-        Flux<Tune> tunes = Flux.interval(Duration.of(1, SECONDS))
-                .map(t -> newTune());
-        return StreamWebsocketMapping.websocketMappingFrom(tunes).withPath("measuredTunes").withDefaultSerialization();
+        return StreamWebsocketMapping.websocketMappingFrom(publicationSimulator.flux()).withPath("measuredTunes").withDefaultSerialization();
     }
-
-
-    private Tune newTune() {
-        return new Tune(chromaSimulator.actualTune(), chromaSimulator.getNoiseStandardDev());
-    }
-
 
 }
