@@ -2,6 +2,7 @@ package io.github.kaifox.gsi.demo.calc.chroma.simulate;
 
 import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.ReplayProcessor;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.Objects;
@@ -25,8 +26,8 @@ public class PublicationSimulator<T> {
     private final AtomicReference<T> actualValue = new AtomicReference<>();
     private final AtomicLong sleepTimeInMillis = new AtomicLong(1000);
 
-    private final EmitterProcessor<T> sink = EmitterProcessor.create();
-    private final Flux<T> stream = sink.publishOn(Schedulers.elastic());
+    private final ReplayProcessor<T> sink = ReplayProcessor.cacheLast();
+    private final Flux<T> stream = sink.publishOn(Schedulers.elastic()).share();
 
     private PublicationSimulator(Supplier<T> supplier) {
         this.supplier = Objects.requireNonNull(supplier, "supplier must not be null");

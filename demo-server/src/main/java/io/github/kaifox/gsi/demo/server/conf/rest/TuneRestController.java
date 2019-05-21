@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.client.mains.restws.components;
+package io.github.kaifox.gsi.demo.server.conf.rest;
 
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;

@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.client.mains.conf;
+package io.github.kaifox.gsi.demo.server.conf;
 
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
 import org.springframework.beans.factory.annotation.Autowired;

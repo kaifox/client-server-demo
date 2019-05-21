@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.client.mains.restws;
+package io.github.kaifox.gsi.demo.client.mains.rest;
 
 import io.github.kaifox.gsi.demo.client.conf.CommonGuiConfiguration;
 import org.minifx.workbench.MiniFx;

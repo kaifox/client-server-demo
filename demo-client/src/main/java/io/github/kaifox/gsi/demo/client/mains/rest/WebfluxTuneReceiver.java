@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.client.mains.restws;
+package io.github.kaifox.gsi.demo.client.mains.rest;
 
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;

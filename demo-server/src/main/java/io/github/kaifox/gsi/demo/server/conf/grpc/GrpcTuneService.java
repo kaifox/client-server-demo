@@ -1,4 +1,4 @@
-package io.github.kaifox.gsi.demo.client.mains.grpc.components;
+package io.github.kaifox.gsi.demo.server.conf.grpc;
 
 import de.gsi.demoservice.grpc.MeasuredTuneReply;
 import de.gsi.demoservice.grpc.MeasuredTuneRequest;

@@ -1,24 +1,24 @@
-package io.github.kaifox.gsi.demo.mains.properties.components;
+package io.github.kaifox.gsi.demo.server.conf.properties;
 
 
-import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
-import io.github.ossgang.properties.core.Properties;
+import cern.lhc.commons.web.property.PropertyRestController;
+import cern.lhc.commons.web.property.PropertyWebsocketConfiguration;
 import cern.lhc.commons.web.property.RestPropertyMapping;
 import cern.lhc.commons.web.property.StreamWebsocketMapping;
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
+import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
+import io.github.ossgang.properties.core.Properties;
 import io.github.ossgang.properties.core.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import reactor.core.publisher.Flux;
-
-import java.time.Duration;
+import org.springframework.context.annotation.Import;
 
 import static cern.lhc.commons.web.property.RestPropertyMapping.mappingFor;
-import static java.time.temporal.ChronoUnit.SECONDS;
 
 @Configuration
+@Import({PropertyRestController.class, PropertyWebsocketConfiguration.class})
 public class PropertiesConfiguration {
 
     @Autowired

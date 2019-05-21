@@ -20,13 +20,13 @@ public class RestPropertiesClient {
 
     @View
     @Bean
-    public SettingsView settingsView() {
+    public SettingsView propertiesSettingsView() {
         return new SettingsView();
     }
 
     @View
     @Bean
-    public FluxTunesView fluxTunesView() {
+    public FluxTunesView propertiesFluxTunesView() {
         return new FluxTunesView();
     }
 

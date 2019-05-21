@@ -5,7 +5,6 @@ import de.gsi.demoservice.grpc.MeasuredTuneRequest;
 import de.gsi.demoservice.grpc.StandardDevRequest;
 import de.gsi.demoservice.grpc.TuneServiceGrpc;
 import de.gsi.demoservice.grpc.TuneServiceGrpc.TuneServiceBlockingStub;
-import de.gsi.demoservice.grpc.TuneServiceGrpc.TuneServiceStub;
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import io.grpc.Channel;
