@@ -9,9 +9,11 @@ import io.github.kaifox.gsi.demo.client.views.SettingsView;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
 import javafx.scene.Node;
+import org.minifx.workbench.annotations.Name;
 import org.minifx.workbench.annotations.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 public class GrpcClientConfiguration {
@@ -24,23 +26,30 @@ public class GrpcClientConfiguration {
     private final TuneReceiver tuneReceiver = GrpcTuneReceiver.fromChannel(grpcChannel);
 
 
-    @View
+    @View(in=GrpcPerspective.class)
+    @Name("tuneFlux")
+    @Order(1)
     @Bean
-    public Node tuneView() {
+    public Node grpcTuneFluxView() {
+        return new FluxTunesView(tuneReceiver.measuredTunes());
+    }
+
+    @View(in=GrpcPerspective.class)
+    @Name("tune")
+    @Order(2)
+    @Bean
+    public Node grpcTuneView() {
         return new PollingTuneView(tuneClient);
     }
 
-    @View
+    @View(in=GrpcPerspective.class)
+    @Name("settings")
+    @Order(3)
     @Bean
-    public Node settingsView() {
+    public Node grpcSettingsView() {
         return new SettingsView(tuneClient);
     }
 
-    @View
-    @Bean
-    public Node tuneFluxView() {
-        return new FluxTunesView(tuneReceiver.measuredTunes());
-    }
 
 
 }

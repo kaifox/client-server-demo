@@ -1,17 +1,17 @@
-package io.github.kaifox.gsi.demo.client.mains.restws;
+package io.github.kaifox.gsi.demo.client.mains.rest;
 
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
 import io.github.kaifox.gsi.demo.client.conf.Constants;
-import io.github.kaifox.gsi.demo.client.mains.ws.WebsocketTuneReceiver;
 import io.github.kaifox.gsi.demo.client.views.FluxTunesView;
 import io.github.kaifox.gsi.demo.client.views.PollingTuneView;
 import io.github.kaifox.gsi.demo.client.views.SettingsView;
 import javafx.scene.Node;
-import org.minifx.workbench.MiniFx;
+import org.minifx.workbench.annotations.Name;
 import org.minifx.workbench.annotations.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 public class WebfluxClientConfiguration {
@@ -19,22 +19,29 @@ public class WebfluxClientConfiguration {
     private final TuneControlClient tuneControlClient = WebfluxTuneControlClient.fromLocation(Constants.HOST, Constants.HTTP_PORT);
     private final TuneReceiver webfluxTuneReceiver = WebfluxTuneReceiver.fromLocation(Constants.HOST, Constants.HTTP_PORT);
 
-    @View
+    @View(in = WebfluxPerspective.class)
+    @Name("tuneFlux")
+    @Order(1)
     @Bean
-    public Node tuneView() {
+    public Node webfluxTuneFluxView() {
+        return new FluxTunesView(webfluxTuneReceiver.measuredTunes());
+    }
+
+    @View(in = WebfluxPerspective.class)
+    @Name("tune")
+    @Order(2)
+    @Bean
+    public Node webfluxTuneView() {
         return new PollingTuneView(tuneControlClient);
     }
 
-    @View
+    @View(in = WebfluxPerspective.class)
+    @Name("settings")
+    @Order(3)
     @Bean
-    public Node settingsView() {
+    public Node webfluxSettingsView() {
         return new SettingsView(tuneControlClient);
     }
 
-    @View
-    @Bean
-    public Node tuneFluxView() {
-        return new FluxTunesView(webfluxTuneReceiver.measuredTunes());
-    }
 
 }
