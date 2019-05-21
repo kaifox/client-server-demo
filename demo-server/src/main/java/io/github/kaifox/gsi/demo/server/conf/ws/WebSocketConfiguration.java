@@ -42,7 +42,9 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
 
     private static final void sendMessage(WebSocketSession session, String value) {
         try {
-            session.sendMessage(new TextMessage(value));
+            if (session.isOpen()) {
+                session.sendMessage(new TextMessage(value));
+            }
         } catch (IOException e) {
             throw new RuntimeException("unable to send message", e);
         }

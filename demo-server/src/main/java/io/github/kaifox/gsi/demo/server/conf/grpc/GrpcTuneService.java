@@ -9,9 +9,13 @@ import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import io.grpc.stub.StreamObserver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class GrpcTuneService extends TuneServiceImplBase {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GrpcTuneService.class);
 
     @Autowired
     private ChromaSimulator chromaSimulator;
@@ -29,7 +33,9 @@ public class GrpcTuneService extends TuneServiceImplBase {
     @Override
     public void getMeasuredTunes(final MeasuredTuneRequest request,
                                  final StreamObserver<MeasuredTuneReply> responseObserver) {
-        publicationSimulator.flux().subscribe(tune -> responseObserver.onNext(responseFor(tune)));
+        publicationSimulator.flux().subscribe(tune ->
+                responseObserver.onNext(responseFor(tune)), t -> responseObserver.onError(t));
+
     }
 
     @Override
