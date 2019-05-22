@@ -27,6 +27,11 @@ public class GrpcTuneReceiver implements TuneReceiver {
     }
 
     @Override
+    public String name() {
+        return "grpc";
+    }
+
+    @Override
     public Flux<Tune> measuredTunes() {
         MeasuredTuneRequest request = MeasuredTuneRequest.getDefaultInstance();
         StreamAdapter<MeasuredTuneReply> observer = new StreamAdapter<>();

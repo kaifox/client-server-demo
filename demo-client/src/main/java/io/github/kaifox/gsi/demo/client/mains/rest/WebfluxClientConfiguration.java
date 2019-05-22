@@ -17,13 +17,17 @@ import org.springframework.core.annotation.Order;
 public class WebfluxClientConfiguration {
 
     private final TuneControlClient tuneControlClient = WebfluxTuneControlClient.fromLocation(Constants.HOST, Constants.HTTP_PORT);
-    private final TuneReceiver webfluxTuneReceiver = WebfluxTuneReceiver.fromLocation(Constants.HOST, Constants.HTTP_PORT);
+
+    @Bean
+    public TuneReceiver webfluxTuneReceiver() {
+        return WebfluxTuneReceiver.fromLocation(Constants.HOST, Constants.HTTP_PORT);
+    }
 
     @View(in = WebfluxPerspective.class)
     @Name("tuneFlux")
     @Order(1)
     @Bean
-    public Node webfluxTuneFluxView() {
+    public Node webfluxTuneFluxView(TuneReceiver webfluxTuneReceiver) {
         return new FluxTunesView(webfluxTuneReceiver.measuredTunes());
     }
 

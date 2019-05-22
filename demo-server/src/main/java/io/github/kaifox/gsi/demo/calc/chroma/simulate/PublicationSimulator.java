@@ -46,7 +46,7 @@ public class PublicationSimulator<T> {
         return sleepTimeInMillis.get();
     }
 
-    public void setDelay(long millis) {
+    public void setDelayInMillis(long millis) {
         this.sleepTimeInMillis.set(millis);
     }
 

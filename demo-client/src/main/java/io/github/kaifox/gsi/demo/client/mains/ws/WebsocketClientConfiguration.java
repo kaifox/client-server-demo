@@ -12,12 +12,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebsocketClientConfiguration {
 
-    private final TuneReceiver websocketTuneReceiver = WebsocketTuneReceiver.fromLocation(Constants.HOST, Constants.HTTP_PORT);
+    @Bean
+    public TuneReceiver websocketTuneReceiver() {
+        return WebsocketTuneReceiver.fromLocation(Constants.HOST, Constants.HTTP_PORT);
+    }
 
-    @View(in=WebsocketPerspective.class, enforceTab = true)
+    @View(in = WebsocketPerspective.class, enforceTab = true)
     @Name("tuneFlux")
     @Bean
-    public Node websocketTuneFluxView() {
+    public Node websocketTuneFluxView(TuneReceiver websocketTuneReceiver) {
         return new FluxTunesView(websocketTuneReceiver.measuredTunes());
     }
 

@@ -22,6 +22,11 @@ public class WebfluxTuneReceiver implements TuneReceiver {
     }
 
     @Override
+    public String name() {
+        return "webflux";
+    }
+
+    @Override
     public Flux<Tune> measuredTunes() {
         return client.get()
                 .uri("/api/measuredTunes")
