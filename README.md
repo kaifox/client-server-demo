@@ -177,7 +177,8 @@ frequency space.
 The resulting calculations can be found [here](https://docs.google.com/spreadsheets/d/1rSFsTiP91ELiCHMhHRgf9pQ7i40eltpZvTUX4zcZN_Q/edit?usp=sharing).
 A summary plot from this measurement:
 
-<iframe width="482.7493261455526" height="298.5" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_YWmEe1CGTlwfsO59KUtxeNf5DJ-4tM7Yapt70fdmRmpHIiy4TmIJvfDNUBddGDns3jEwMlzze8B_/pubchart?oid=415096969&amp;format=interactive"></iframe>
+![chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vT_YWmEe1CGTlwfsO59KUtxeNf5DJ-4tM7Yapt70fdmRmpHIiy4TmIJvfDNUBddGDns3jEwMlzze8B_/pubchart?oid=415096969&format=interactive)
+
 
 
 ### ossgang-properties
