@@ -10,6 +10,6 @@ public final class Conversions {
     }
 
     public static final Tune toTune(MeasuredTuneReply reply) {
-        return new Tune(reply.getValue(), reply.getError());
+        return new Tune(reply.getValue(), reply.getError(), reply.getPayloadList());
     }
 }

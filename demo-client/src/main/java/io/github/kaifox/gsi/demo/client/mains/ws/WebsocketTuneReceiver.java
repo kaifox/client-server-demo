@@ -1,7 +1,11 @@
 package io.github.kaifox.gsi.demo.client.mains.ws;
 
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
+import io.github.kaifox.gsi.demo.client.conf.Constants;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.WebSocketClient;
@@ -16,13 +20,20 @@ import static java.util.Objects.requireNonNull;
 
 public class WebsocketTuneReceiver implements TuneReceiver {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebsocketTuneReceiver.class);
+
     private final WebSocketClient wsClient = new StandardWebSocketClient();
+    private final StringFluxWsHandler handler = new StringFluxWsHandler();
+    private final Flux<Tune> flux;
 
     private final String location;
 
     private WebsocketTuneReceiver(String host, int port) {
         requireNonNull(host, "host must not be null");
         location = host + ":" + port;
+        connect();
+        Flux<Tune> map = handler.flux().publishOn(Schedulers.elastic()).map(v -> defaultDeserialization(v, Tune.class));
+        this.flux = map.share();
     }
 
     public static WebsocketTuneReceiver fromLocation(String host, int port) {
@@ -30,12 +41,27 @@ public class WebsocketTuneReceiver implements TuneReceiver {
     }
 
     @Override
+    public String name() {
+        return "websocket";
+    }
+
+    @Override
     public Flux<Tune> measuredTunes() {
-        StringFluxWsHandler handler = new StringFluxWsHandler();
-        wsClient.doHandshake(handler, "ws://" + location + "/ws/measuredTunes");
-        // set message size limits to 1 MB ?
-        return handler.flux()
-                .map(v -> defaultDeserialization(v, Tune.class));
+        return this.flux;
+    }
+
+    private void connect() {
+        String uri = "ws://" + location + "/ws/measuredTunes";
+        ListenableFuture<WebSocketSession> a = wsClient.doHandshake(handler, uri);
+        try {
+            WebSocketSession session = a.get();
+            LOGGER.info("Successfully connected to websocket {} with id {}", uri, session.getId());
+            session.setBinaryMessageSizeLimit(Constants.ONE_GIGABYTE);
+            session.setTextMessageSizeLimit(Constants.ONE_GIGABYTE);
+        } catch (Exception e) {
+            LOGGER.error("Cannot reconnect to {}: {}", uri, e.getMessage());
+            throw new IllegalStateException("Cannot connect to " + uri, e);
+        }
     }
 
 

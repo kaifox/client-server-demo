@@ -15,26 +15,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
+import static io.github.kaifox.gsi.demo.client.conf.Constants.ONE_GIGABYTE;
+
 @Configuration
 public class GrpcClientConfiguration {
 
     private final Channel grpcChannel = ManagedChannelBuilder.forAddress(Constants.HOST, Constants.GRPC_PORT)
             .usePlaintext()
+            .maxInboundMessageSize(ONE_GIGABYTE)
             .build();
 
     private final TuneControlClient tuneClient = GrpcTuneControlClient.fromChannel(grpcChannel);
-    private final TuneReceiver tuneReceiver = GrpcTuneReceiver.fromChannel(grpcChannel);
 
+    @Bean
+    public TuneReceiver grpcTuneReceiver() {
+        return GrpcTuneReceiver.fromChannel(grpcChannel);
+    }
 
-    @View(in=GrpcPerspective.class)
+    @View(in = GrpcPerspective.class)
     @Name("tuneFlux")
     @Order(1)
     @Bean
-    public Node grpcTuneFluxView() {
-        return new FluxTunesView(tuneReceiver.measuredTunes());
+    public Node grpcTuneFluxView(TuneReceiver grpcTuneReceiver) {
+        return new FluxTunesView(grpcTuneReceiver.measuredTunes());
     }
 
-    @View(in=GrpcPerspective.class)
+    @View(in = GrpcPerspective.class)
     @Name("tune")
     @Order(2)
     @Bean
@@ -42,14 +48,13 @@ public class GrpcClientConfiguration {
         return new PollingTuneView(tuneClient);
     }
 
-    @View(in=GrpcPerspective.class)
+    @View(in = GrpcPerspective.class)
     @Name("settings")
     @Order(3)
     @Bean
     public Node grpcSettingsView() {
         return new SettingsView(tuneClient);
     }
-
 
 
 }

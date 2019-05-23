@@ -58,6 +58,10 @@ public class GrpcTuneService extends TuneServiceImplBase {
     }
 
     private MeasuredTuneReply responseFor(Tune tune) {
-        return MeasuredTuneReply.newBuilder().setValue(tune.getValue()).setError(tune.getError()).build();
+        return MeasuredTuneReply.newBuilder()
+                .setValue(tune.getValue())
+                .setError(tune.getError())
+                .addAllPayload(tune.getPayload())
+                .build();
     }
 }

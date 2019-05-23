@@ -28,6 +28,7 @@ message StandardDevRequest {
 message MeasuredTuneReply {
     double value = 1;
     double error = 2;
+    repeated double payload = 3;
 }
 
 message StandardDevReply {

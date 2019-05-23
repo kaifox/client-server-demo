@@ -137,6 +137,21 @@ wsTune.onmessage = (msg) => {
 }
 ```
 
+## Performance comparison
+
+The demo project contains some simple utilities to probe the transportation capabilities of the different technologies.
+There exist dedicated endpoints (and some panel in the client) to tune some parameters of publications:
+
+* `delayInMillis`: this is the delay in milliseconds between two publications of a tune item.
+* `payloadLength`: In addition to the tune value and error, the transported tune object contains an additional list of
+double values, which can be of variable length.
+
+Using this input parameters, then the publication frequency on the client is calculated and displayed. 
+
+Here is a screenshot of the javafx-gui showing this testing view:
+
+<img src="./images/testing-config.png" alt="screenshot" width="500" />
+
 ### ossgang-properties
 
 * combines REST + websockets.
