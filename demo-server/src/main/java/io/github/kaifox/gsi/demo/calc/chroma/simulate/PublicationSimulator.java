@@ -35,7 +35,7 @@ public class PublicationSimulator<T> {
     }
 
     public Flux<T> flux() {
-        return this.stream;
+        return this.stream.onBackpressureDrop().publishOn(Schedulers.elastic());
     }
 
     public T latest() {

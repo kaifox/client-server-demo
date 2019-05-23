@@ -175,10 +175,9 @@ As a complementary measurement, we looked at small packages only (`payloadLength
 frequency space.
 
 The resulting calculations can be found [here](https://docs.google.com/spreadsheets/d/1rSFsTiP91ELiCHMhHRgf9pQ7i40eltpZvTUX4zcZN_Q/edit?usp=sharing).
-A summary plot from this measurement:
-
-![chart](https://docs.google.com/spreadsheets/d/e/2PACX-1vT_YWmEe1CGTlwfsO59KUtxeNf5DJ-4tM7Yapt70fdmRmpHIiy4TmIJvfDNUBddGDns3jEwMlzze8B_/pubchart?oid=415096969&format=interactive)
-
+As a summary: All the three technologies (in the given setup) seem to perform very similar. 
+The reduction in update frequency seems to be mainly dominated by some constant overhead per publication (0.2ms), 
+which of course is more visible at higher update rates. 
 
 
 ### ossgang-properties

@@ -47,7 +47,7 @@ public class WebsocketTuneReceiver implements TuneReceiver {
 
     @Override
     public Flux<Tune> measuredTunes() {
-        return this.flux;
+        return this.flux.onBackpressureLatest().publishOn(Schedulers.elastic());
     }
 
     private void connect() {

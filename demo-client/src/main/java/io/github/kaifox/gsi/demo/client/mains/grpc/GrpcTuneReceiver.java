@@ -16,10 +16,12 @@ import java.util.Objects;
 public class GrpcTuneReceiver implements TuneReceiver {
 
     private final TuneServiceGrpc.TuneServiceStub async;
+    private final Flux<Tune> flux;
 
     private GrpcTuneReceiver(Channel channel) {
         Objects.requireNonNull(channel, "channel must not be null.");
         this.async = TuneServiceGrpc.newStub(channel);
+        this.flux = connect().share();
     }
 
     public static GrpcTuneReceiver fromChannel(Channel channel) {
@@ -33,12 +35,16 @@ public class GrpcTuneReceiver implements TuneReceiver {
 
     @Override
     public Flux<Tune> measuredTunes() {
+        return this.flux.onBackpressureLatest().publishOn(Schedulers.elastic());
+    }
+
+    private Flux<Tune> connect() {
         MeasuredTuneRequest request = MeasuredTuneRequest.getDefaultInstance();
         StreamAdapter<MeasuredTuneReply> observer = new StreamAdapter<>();
         async.getMeasuredTunes(request, observer);
 
         return observer.asFlux()
-                .subscribeOn(Schedulers.elastic())
+                .publishOn(Schedulers.elastic())
                 .map(Conversions::toTune);
     }
 

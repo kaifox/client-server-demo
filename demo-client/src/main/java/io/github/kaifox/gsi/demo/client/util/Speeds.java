@@ -1,8 +1,11 @@
 package io.github.kaifox.gsi.demo.client.util;
 
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
+import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +17,10 @@ public final class Speeds {
 
     public static final Flux<Double> emissionSpeedInHz(Flux fluxToMeasure) {
         Flux<List<Instant>> buffer = fluxToMeasure
+                .publishOn(Schedulers.elastic())
                 .map(v -> Instant.now())
-                .buffer(10);
-        return buffer.map(inst -> averageSpeedInHz(inst));
+                .bufferTimeout(100, Duration.of(10, ChronoUnit.SECONDS));
+        return buffer.onBackpressureLatest().map(inst -> averageSpeedInHz(inst));
     }
 
     private static double averageSpeedInHz(List<Instant> instants) {
