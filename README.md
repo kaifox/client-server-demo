@@ -149,8 +149,36 @@ double values, which can be of variable length.
 Using this input parameters, then the publication frequency on the client is calculated and displayed. 
 
 Here is a screenshot of the javafx-gui showing this testing view:
-
 <img src="./images/testing-config.png" alt="screenshot" width="500" />
+
+In the following table, we assume a requested update rate. Then, as a quick check,
+we tuned up the payload size and look when the requested speed cannot be maintained on the client side (breakdown). 
+The streams on the server of the demo application are configured to drop in case of backpressure, so we will loose
+updates in this case.
+
+The following table shows the approximate payload lengths, where the demanded publication freq is slowed down by 25%.
+
+| Tech       | 25 Hz demand | 10 Hz demand  | 4 Hz demand  |  
+| ----       | ------------ | ------------- | -----------  | 
+| gRPC       | &tilde; 400k | &tilde; 400k  | &tilde; 1M | 
+| Websockets | &tilde; 65k  | &tilde; 160k  | &tilde; 400k |
+| Webflux    | &tilde; 55k  | &tilde; 140k  | &tilde; 350k |
+
+**DISCLAIMER**
+> These tests were done on a setup with both, client and server running on the same machine.
+> No tuning or optimization on any of the technologies was done. 
+> This tests represent more or less a quite naive implementation. 
+> Due to these restrictions, the absolute numbers might not be fully valuable.
+> However, as a comparision between these technologies, we consider them still valuable. 
+
+As a complementary measurement, we looked at small packages only (`payloadLength=0`), and scanned the publication 
+frequency space.
+
+The resulting calculations can be found [here](https://docs.google.com/spreadsheets/d/1rSFsTiP91ELiCHMhHRgf9pQ7i40eltpZvTUX4zcZN_Q/edit?usp=sharing).
+A summary plot from this measurement:
+
+<iframe width="482.7493261455526" height="298.5" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_YWmEe1CGTlwfsO59KUtxeNf5DJ-4tM7Yapt70fdmRmpHIiy4TmIJvfDNUBddGDns3jEwMlzze8B_/pubchart?oid=415096969&amp;format=interactive"></iframe>
+
 
 ### ossgang-properties
 
