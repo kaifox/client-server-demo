@@ -1,4 +1,5 @@
-Highcharts.setOptions({global: { useUTC: false } });
+
+Highcharts.setOptions({ global: { useUTC: false } });
 function parseJSON(msg) {
 	return JSON.parse(msg.data.replace(/(NaN|Infinity)/ig, null));
 }
@@ -10,7 +11,7 @@ function parseJSON(msg) {
 $('#getTuneButton').click(e => {
 	$.get("http://" + location.host + "/api/measuredTune", msg => {
 		$('#tuneValue').text(JSON.stringify(msg));
-	  });
+	});
 })
 
 
@@ -20,7 +21,7 @@ $('#getTuneButton').click(e => {
 
 var source = new EventSource("http://" + location.host + "/api/measuredTunes");
 source.onmessage = e => {
-		$('#testTune').text('from SSE: ' + e.data);
+	$('#testTune').text('from SSE: ' + e.data);
 };
 
 
@@ -32,7 +33,7 @@ source.onmessage = e => {
 function updateStandardDev() {
 	$.get("http://" + location.host + "/api/standardDev", msg => {
 		$('#standardDevInput').val(msg);
-	  });
+	});
 }
 
 updateStandardDev();
@@ -49,9 +50,30 @@ $('#setStandardDevButton').click(e => {
  * The following subscribes to websockets on the server.
  */
 
-var wsTune = new WebSocket("ws://"+location.host+"/ws/measuredTunes");
+var wsTune = new WebSocket("ws://" + location.host + "/ws/measuredTunes");
 wsTune.onmessage = (msg) => {
-    $('#wsTune').text('from WS: ' + msg.data);
+	$('#wsTune').text('from WS: ' + msg.data);
 }
+
+
+/**
+ * gRPC part
+ */
+
+const { MeasuredTuneRequest, MeasuredTuneReply, StandardDevRequest, StandardDevReply } = require('./tune_pb.js');
+const { TuneServiceClient } = require('./tune_grpc_web_pb.js');
+
+var tuneService = new TuneServiceClient('http://localhost:5252');
+
+
+$('#grpcGetTuneButton').click(e => {
+	var request = new proto.demo.MeasuredTuneRequest();
+	tuneService.getMeasuredTune(request, {}, (err, response) => {
+		console.log(response);
+	});
+})
+
+
+
 
 

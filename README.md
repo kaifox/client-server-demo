@@ -171,6 +171,11 @@ The following table shows the approximate payload lengths, where the demanded pu
 > Due to these restrictions, the absolute numbers might not be fully valuable.
 > However, as a comparision between these technologies, we consider them still valuable. 
 
+**Test Setup:**
+* Acer Predator G9-791
+* [Intel Core i7-6700HQ CPU @ 2.60 GHz](https://en.wikichip.org/wiki/intel/core_i7/i7-6700hq) (4 Cores, 7 Threads)
+* 64.0 GB RAM
+
 In summary, gRPC clearly is performing better for big data loads. Webflux and Websockets are very similar within 
 the accuracy of this 'measurement';
 

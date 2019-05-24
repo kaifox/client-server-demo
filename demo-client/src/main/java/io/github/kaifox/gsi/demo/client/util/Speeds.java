@@ -19,7 +19,8 @@ public final class Speeds {
         Flux<List<Instant>> buffer = fluxToMeasure
                 .publishOn(Schedulers.elastic())
                 .map(v -> Instant.now())
-                .bufferTimeout(100, Duration.of(10, ChronoUnit.SECONDS));
+                .buffer(10);
+                //.bufferTimeout(100, Duration.of(10, ChronoUnit.SECONDS));
         return buffer.onBackpressureLatest().map(inst -> averageSpeedInHz(inst));
     }
 
