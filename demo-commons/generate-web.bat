@@ -1,0 +1,1 @@
+protoc -I=src\main\proto tune.proto --js_out=import_style=commonjs:../demo-server/src/main/resources/static --grpc-web_out=import_style=commonjs,mode=grpcwebtext:../demo-server/src/main/resources/static

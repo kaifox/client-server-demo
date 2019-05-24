@@ -171,6 +171,9 @@ The following table shows the approximate payload lengths, where the demanded pu
 > Due to these restrictions, the absolute numbers might not be fully valuable.
 > However, as a comparision between these technologies, we consider them still valuable. 
 
+In summary, gRPC clearly is performing better for big data loads. Webflux and Websockets are very similar within 
+the accuracy of this 'measurement';
+
 As a complementary measurement, we looked at small packages only (`payloadLength=0`), and scanned the publication 
 frequency space.
 
@@ -185,3 +188,13 @@ which of course is more visible at higher update rates.
 * combines REST + websockets.
 * particularly useful when setable and getable
 * Potentially an interesting combination could be REST + SSE.
+
+
+#### Criteria to decide what to use
+
+* Integrierbarkeit (how well does it fit in the landscape)
+* Language agnostic?
+* Handhabbarkeit?
+* Speed?
+
+Also to be discussed with Hanno
