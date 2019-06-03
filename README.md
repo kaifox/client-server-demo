@@ -141,7 +141,7 @@ wsTune.onmessage = (msg) => {
 
 WIP
 
-Notest to get started with webdev: 
+Notes to get started with webdev: 
 [webdev.md](webdev.md)
 
 ## Performance comparison
