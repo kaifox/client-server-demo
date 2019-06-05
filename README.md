@@ -141,8 +141,8 @@ wsTune.onmessage = (msg) => {
 
 WIP
 
-Notes to get started with webdev: 
-[webdev.md](webdev.md)
+Notes to get started with gRPC development: 
+[grpc-develop.md](demo-server/grpc/grpc-develop.md)
 
 ## Performance comparison
 
@@ -213,6 +213,4 @@ Also to be discussed with Hanno
 
 #### Other links
 
-* gRPC needs a proxy to convert between gRPC web and a native protocol. https://github.com/grpc/grpc-web/issues/347
-* If no proxy is used, one gets an error like this on the server: `io.netty.handler.codec.http2.Http2Exception: Unexpected HTTP/1.x request: OPTIONS /demo.TuneService/GetMeasuredTune` 
-* https://stackoverflow.com/questions/44877606/is-grpchttp-2-faster-than-rest-with-http-2
+

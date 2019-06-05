@@ -1471,7 +1471,7 @@ wsTune.onmessage = (msg) => {
 const { MeasuredTuneRequest, MeasuredTuneReply, StandardDevRequest, StandardDevReply } = require('./tune_pb.js');
 const { TuneServiceClient } = require('./tune_grpc_web_pb.js');
 
-var tuneService = new TuneServiceClient('http://localhost:5252');
+var tuneService = new TuneServiceClient('http://localhost:5353');
 
 
 $('#grpcGetTuneButton').click(e => {
