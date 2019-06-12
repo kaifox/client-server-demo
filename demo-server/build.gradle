@@ -1,7 +1,6 @@
 dependencies {
     compile project(":demo-commons")
 
-    compile group: 'io.github.ossgang', name: 'ossgang-properties-web-server', version: "+"
 
     compile group: 'com.google.guava', name: 'guava', version: guavaVersion
 
@@ -9,6 +8,20 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: springBootVersion
 
     implementation group: 'org.springframework.boot', name:'spring-boot-devtools', version: springBootVersion
+
+
+    compile group: 'org.springframework', name: 'spring-core', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+    compile group: 'org.springframework', name: 'spring-websocket', version: springVersion
+    compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
+
+    compile group: 'io.projectreactor', name: 'reactor-core', version: reactorVersion
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+
+    /* This looks a bit like an overkill ... only used for the HttpServletResponse.... classes*/
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '9.0.12'
+
 
 
 }

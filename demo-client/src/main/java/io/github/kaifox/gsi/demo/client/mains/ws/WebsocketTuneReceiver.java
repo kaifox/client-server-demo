@@ -3,6 +3,7 @@ package io.github.kaifox.gsi.demo.client.mains.ws;
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
 import io.github.kaifox.gsi.demo.client.conf.Constants;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
+import io.github.kaifox.gsi.demo.commons.util.JsonConversions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -15,7 +16,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.ReplayProcessor;
 import reactor.core.scheduler.Schedulers;
 
-import static io.github.ossgang.properties.core.JsonConversions.defaultDeserialization;
 import static java.util.Objects.requireNonNull;
 
 public class WebsocketTuneReceiver implements TuneReceiver {
@@ -32,7 +32,7 @@ public class WebsocketTuneReceiver implements TuneReceiver {
         requireNonNull(host, "host must not be null");
         location = host + ":" + port;
         connect();
-        Flux<Tune> map = handler.flux().publishOn(Schedulers.elastic()).map(v -> defaultDeserialization(v, Tune.class));
+        Flux<Tune> map = handler.flux().publishOn(Schedulers.elastic()).map(v -> JsonConversions.defaultDeserialization(v, Tune.class));
         this.flux = map.share();
     }
 

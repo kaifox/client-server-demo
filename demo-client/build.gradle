@@ -2,8 +2,6 @@ dependencies {
 
     compile project(":demo-commons")
 
-    compile group: 'io.github.ossgang', name: 'ossgang-properties-fx', version: "+"
-
     compile group: 'org.minifx', name: 'minifx-workbench', version: "+"
 
     compile group: 'org.springframework', name: 'spring-web', version: springVersion
@@ -15,7 +13,6 @@ dependencies {
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '9.0.12'
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-websocket', version: '9.0.12'
 
-    compile group: 'io.github.ossgang', name: 'ossgang-properties-web-client', version: "+"
     compile group: 'com.google.guava', name: 'guava', version: guavaVersion
 
 
