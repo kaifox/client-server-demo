@@ -17,12 +17,6 @@ static_resources:
                     - name: local_service
                       domains:
                         - "*"
-                      routes:
-                        - match:
-                            prefix: "/"
-                            grpc: {}
-                          route:
-                            cluster: local_service_grpc
                       cors:
                         allow_origin:
                           - "*"
@@ -35,10 +29,19 @@ static_resources:
                             numerator: 100
                             denominator: HUNDRED
                           runtime_key: cors.www.enabled
+                      routes:
+                        - match:
+                            prefix: "/"
+                            grpc: {}
+                            cors:
+                              allow_origin: "*"
+                          route:
+                            cluster: local_service_grpc
+
                 http_filters:
-                  - name: envoy.router
-                    typed_config: {}
                   - name: envoy.cors
+                  - name: envoy.router
+
   clusters:
     - name: local_service_grpc
       connect_timeout: 0.250s

@@ -20,6 +20,7 @@ public class GrpcConfiguration {
 
     @Bean
     public Server grpcServer(BindableService grpcTuneService) throws IOException {
+
         return ServerBuilder.forPort(SERVER_PORT)
                 .addService(grpcTuneService)
                 .build()
