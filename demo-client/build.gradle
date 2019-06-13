@@ -1,3 +1,5 @@
+apply plugin: 'org.openjfx.javafxplugin'
+
 dependencies {
 
     compile project(":demo-commons")
@@ -16,4 +18,13 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: guavaVersion
 
 
+}
+
+javafx {
+    // version = "12.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing', 'javafx.web' ]
+}
+
+application {
+    mainClassName = 'io.github.kaifox.gsi.demo.client.mains.all.AllClientMain'
 }

@@ -11,6 +11,7 @@ buildscript {
             maven { url 'http://artifactory.cern.ch/ds-jcenter' }
             maven { url 'http://artifactory.cern.ch/development' }
         } else {
+            mavenCentral()
             jcenter()
         }
     }
@@ -19,6 +20,7 @@ buildscript {
 
 plugins {
     id 'com.google.protobuf' version '0.8.8' apply false
+    id 'org.openjfx.javafxplugin' version '0.0.7' apply false
 }
 
 
@@ -28,6 +30,7 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'application'
     apply plugin: 'jacoco'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
@@ -36,7 +39,7 @@ subprojects {
     apply plugin: 'com.jfrog.bintray'
 
 
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
 
     repositories {
         if (project['CERN_VM']) {
@@ -99,6 +102,9 @@ subprojects {
         println "Applying deployment scripts for ${project.name}"
         apply from: '../gradle/bintray-deploy.gradle'
     }
+
 }
+
+
 
 task wrapper(type: Wrapper) { gradleVersion = '4.10.2' }

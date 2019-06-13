@@ -22,7 +22,9 @@ dependencies {
     /* This looks a bit like an overkill ... only used for the HttpServletResponse.... classes*/
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '9.0.12'
 
-
-
 }
 
+
+application {
+    mainClassName = 'io.github.kaifox.gsi.demo.server.mains.all.AllServerMain'
+}
