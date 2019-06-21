@@ -30,7 +30,6 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'application'
     apply plugin: 'jacoco'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
@@ -103,8 +102,23 @@ subprojects {
         apply from: '../gradle/bintray-deploy.gradle'
     }
 
+    task generatePom  {
+        pom {
+            project {
+                inceptionYear '2019'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }.writeTo("pom.xml")
+    }
 }
 
 
 
 task wrapper(type: Wrapper) { gradleVersion = '4.10.2' }
+

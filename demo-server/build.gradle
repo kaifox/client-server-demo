@@ -1,3 +1,5 @@
+apply plugin: 'application'
+
 dependencies {
     compile project(":demo-commons")
 
