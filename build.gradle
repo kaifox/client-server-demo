@@ -102,7 +102,7 @@ subprojects {
         apply from: '../gradle/bintray-deploy.gradle'
     }
 
-    task generatePom  {
+    task updatePom  {
         pom {
             project {
                 inceptionYear '2019'
