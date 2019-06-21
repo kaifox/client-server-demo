@@ -58,6 +58,7 @@ subprojects {
         compile("javax.annotation:javax.annotation-api:1.3.2")
     }
 
+    
     javadoc { options.encoding = "UTF-8" }
 
     if (!project.tasks.findByName("javadocJar")) {
@@ -103,21 +104,28 @@ subprojects {
     }
 
     task updatePom  {
-        pom {
-            project {
-                inceptionYear '2019'
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
+        doLast {
+            pom {
+                project {
+                    parent {
+                        groupId 'io.github.kaifox'
+                        artifactId 'client-server-demo'
+                        version '1.0-SNAPSHOT'
+                    }
+                    inceptionYear '2019'
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
                     }
                 }
-            }
-        }.writeTo("pom.xml")
+            }.writeTo("pom.xml")
+        }
     }
-}
 
+}
 
 
 task wrapper(type: Wrapper) { gradleVersion = '4.10.2' }
