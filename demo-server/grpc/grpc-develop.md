@@ -22,7 +22,7 @@ To run the envoy proxy:
 
 * Install docker
 * from this dir run `docker build -t envoy:v1 .` (envoy config copied from [here](https://raw.githubusercontent.com/envoyproxy/envoy/master/examples/grpc-bridge/config/s2s-grpc-envoy.yamlhttps://raw.githubusercontent.com/envoyproxy/envoy/master/examples/grpc-bridge/config/s2s-grpc-envoy.yaml) ... no real clue what that does ;-) 
-* docker run -d --name envoy -p 9901:9901 -p 10000:10000 envoy:v1
+* docker run --name envoy -p 9901:9901 -p 5353:5353 envoy:v1
 
 
 Why all that?

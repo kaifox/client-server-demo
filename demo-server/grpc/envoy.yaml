@@ -55,7 +55,7 @@ static_resources:
               - endpoint:
                   address:
                     socket_address:
-                      address: 127.0.0.1
+                      address: 192.168.1.107
                       port_value: 5252
 admin:
   access_log_path: "/var/log/envoy_admin_access.log"
