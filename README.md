@@ -3,6 +3,27 @@
 The purpose of this project is to compare and demonstrate different technologies for client-server communication 
 for control system components.
 
+### Getting started
+
+The easiest way to get the demo working is to check out the actual project from this repository 
+and using the included gradle wrapper to start client and server.
+
+From within the top directory, start the server by:
+```
+./gradlew :demo-server:run
+```
+
+and to start the client (javafx gui), type:
+```
+./gradlew :demo-client:run
+```
+
+On a linux system, it you might have to first make the gradle wrapper script executable:
+```
+chmod a+x ./gradlew
+```
+
+
 ### Pure REST
 
 * No notification possible
