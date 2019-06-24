@@ -25,6 +25,7 @@ dependencies {
 
 }
 
+ext.pomExtraInfo = {}
 
 application {
     mainClassName = 'io.github.kaifox.gsi.demo.server.mains.all.AllServerMain'
