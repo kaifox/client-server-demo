@@ -5,6 +5,7 @@ for control system components.
 
 ### Getting started
 
+#### Gradle
 The easiest way to get the demo working is to check out the actual project from this repository 
 and using the included gradle wrapper to start client and server.
 
@@ -23,6 +24,31 @@ On a linux system, it you might have to first make the gradle wrapper script exe
 chmod a+x ./gradlew
 ```
 
+#### Maven
+
+Important note: 
+> The included pom files are generated from the gradle dependencies. Please never edit the poms by hand,
+> but change the build.gradle files and regenerate the pom files using
+
+```
+./gradlew updatePom
+```
+
+##### running with maven
+
+To run the server using maven, from the command line, one has to change into the server 
+directory and then call the mvn exec command. So from the top dir somehow like this:
+
+```
+cd demo-server
+mvn exec:java -D"exec.mainClass"="io.github.kaifox.gsi.demo.server.mains.all.AllServerMain"
+```
+
+Running the javafx client works analogous:
+```
+cd demo-client
+mvn exec:java -D"exec.mainClass"="io.github.kaifox.gsi.demo.client.mains.all.AllClientMain"
+```
 
 ### Pure REST
 
