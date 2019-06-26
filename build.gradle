@@ -140,7 +140,7 @@ subprojects {
                     goalsNode.appendNode("goal", 'compile-custom');
                 }
             }
-            pomInfo.writeTo("pom.xml")
+            pomInfo.writeTo("pom-generated.xml")
         }
     }
 

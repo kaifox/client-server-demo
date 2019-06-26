@@ -95,49 +95,49 @@
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-graphics</artifactId>
       <version>11.0.2</version>
-      <classifier>win</classifier>
+      <classifier>${os.detected.classifier}</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-media</artifactId>
       <version>11.0.2</version>
-      <classifier>win</classifier>
+      <classifier>${os.detected.classifier}</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-base</artifactId>
       <version>11.0.2</version>
-      <classifier>win</classifier>
+      <classifier>${os.detected.classifier}</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-web</artifactId>
       <version>11.0.2</version>
-      <classifier>win</classifier>
+      <classifier>${os.detected.classifier}</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
-      <artifactId>javafx-swing</artifactId>
+      <artifactId>javafx-s${os.detected.classifier}g</artifactId>
       <version>11.0.2</version>
-      <classifier>win</classifier>
+      <classifier>${os.detected.classifier}</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
       <version>11.0.2</version>
-      <classifier>win</classifier>
+      <classifier>${os.detected.classifier}</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>11.0.2</version>
-      <classifier>win</classifier>
+      <classifier>${os.detected.classifier}</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
