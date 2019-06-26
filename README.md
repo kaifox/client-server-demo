@@ -13,19 +13,19 @@ From within the top directory, start the server by:
 ```
 ./gradlew :demo-server:run
 ```
-Optionally, you can adjust the server (http) port by calling
+Optionally, you can adjust the server (http) and the grpc port by calling
 ```
-./gradlew :demo-server:run -D"server.port"=9090
+./gradlew :demo-server:run -D"server.port"=9090 -D"grpc.port"=5353
 ```
-This will set the port to 9090 (default would be 8080).
+This will set the port to 9090 (default would be 8080), and grpc port to 5353 (default would be 5252).
 
 and to start the client (javafx gui), type:
 ```
 ./gradlew :demo-client:run
 ```
-Optionally, you can adjust the server (http) port by calling
+Optionally, you can adjust the server (http) port, server host and grpc port by calling
 ```
-./gradlew :demo-client:run -D"server.port"=9090
+./gradlew :demo-client:run -D"server.port"=9090 -D"server.host"=somehost -D"grpc.port"=5353
 ```
 This will set the port to 9090 (default would be 8080).
 
@@ -70,7 +70,8 @@ development machine. In this case, e.g. the port 9090 could be specified like th
 ```
 mvn exec:java -D"server.port"="9090"
 ```
-(The quotes (") are only required on windows machines)
+(The quotes (") are only required on windows machines). Also the grpc port can be adjusted as well as the server-host
+for the client to use (see above gradle examples).
 
 
 ### Pure REST
