@@ -13,11 +13,21 @@ From within the top directory, start the server by:
 ```
 ./gradlew :demo-server:run
 ```
+Optionally, you can adjust the server (http) port by calling
+```
+./gradlew :demo-server:run -D"server.port"=9090
+```
+This will set the port to 9090 (default would be 8080).
 
 and to start the client (javafx gui), type:
 ```
 ./gradlew :demo-client:run
 ```
+Optionally, you can adjust the server (http) port by calling
+```
+./gradlew :demo-client:run -D"server.port"=9090
+```
+This will set the port to 9090 (default would be 8080).
 
 On a linux system, it you might have to first make the gradle wrapper script executable:
 ```
@@ -45,14 +55,23 @@ directory and then call the mvn exec command. So from the top dir somehow like t
 
 ```
 cd demo-server
-mvn exec:java -D"exec.mainClass"="io.github.kaifox.gsi.demo.server.mains.all.AllServerMain"
+mvn exec:java 
 ```
 
 Running the javafx client works analogous:
 ```
 cd demo-client
-mvn exec:java -D"exec.mainClass"="io.github.kaifox.gsi.demo.client.mains.all.AllClientMain"
+mvn exec:java 
 ```
+
+For both, client and server, it is possible to specify the http port through a system property.
+This is particularly necessary, in case the port 8080 (default) is already occupied on your
+development machine. In this case, e.g. the port 9090 could be specified like this:
+```
+mvn exec:java -D"server.port"="9090"
+```
+(The quotes (") are only required on windows machines)
+
 
 ### Pure REST
 
