@@ -20,7 +20,7 @@ import static io.github.kaifox.gsi.demo.client.conf.ConfigValues.ONE_GIGABYTE;
 @Configuration
 public class GrpcClientConfiguration {
 
-    private final Channel grpcChannel = ManagedChannelBuilder.forAddress(ConfigValues.HOST, ConfigValues.GRPC_PORT)
+    private final Channel grpcChannel = ManagedChannelBuilder.forAddress(ConfigValues.host(), ConfigValues.grpcPort())
             .usePlaintext()
             .maxInboundMessageSize(ONE_GIGABYTE)
             .build();

@@ -35,5 +35,7 @@ application {
 
 run {
     /* Pass on selected system properties */
+    systemProperty "server.host", System.getProperty("server.host")
     systemProperty "server.port", System.getProperty("server.port")
+    systemProperty "grpc.port", System.getProperty("grpc.port")
 }

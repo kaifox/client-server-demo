@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static io.github.kaifox.gsi.demo.client.conf.ConfigValues.HOST;
 import static org.minifx.workbench.domain.PerspectivePos.CENTER;
 import static org.minifx.workbench.domain.PerspectivePos.RIGHT;
 
@@ -25,7 +24,7 @@ public class TestingClientConfiguration {
     @Autowired
     private List<TuneReceiver> receivers;
 
-    private TestControlClient testControlClient = WebfluxTestControlClient.fromLocation(HOST, ConfigValues.httpPort());
+    private TestControlClient testControlClient = WebfluxTestControlClient.fromLocation(ConfigValues.host(), ConfigValues.httpPort());
 
     @View(in = TestControlPerspective.class, at = RIGHT, enforceTab = true)
     @Name("settings")
