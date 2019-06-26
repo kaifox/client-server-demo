@@ -2,7 +2,7 @@ package io.github.kaifox.gsi.demo.client.mains.grpc;
 
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
-import io.github.kaifox.gsi.demo.client.conf.Constants;
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
 import io.github.kaifox.gsi.demo.client.views.FluxTunesView;
 import io.github.kaifox.gsi.demo.client.views.PollingTuneView;
 import io.github.kaifox.gsi.demo.client.views.SettingsView;
@@ -15,12 +15,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
-import static io.github.kaifox.gsi.demo.client.conf.Constants.ONE_GIGABYTE;
+import static io.github.kaifox.gsi.demo.client.conf.ConfigValues.ONE_GIGABYTE;
 
 @Configuration
 public class GrpcClientConfiguration {
 
-    private final Channel grpcChannel = ManagedChannelBuilder.forAddress(Constants.HOST, Constants.GRPC_PORT)
+    private final Channel grpcChannel = ManagedChannelBuilder.forAddress(ConfigValues.HOST, ConfigValues.GRPC_PORT)
             .usePlaintext()
             .maxInboundMessageSize(ONE_GIGABYTE)
             .build();

@@ -1,24 +1,21 @@
 package io.github.kaifox.gsi.demo.client.mains.testing;
 
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
 import io.github.kaifox.gsi.demo.client.views.ReceptionSpeedView;
 import io.github.kaifox.gsi.demo.client.views.TestSettingsView;
-import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import org.minifx.workbench.annotations.Name;
 import org.minifx.workbench.annotations.View;
-import org.minifx.workbench.domain.PerspectivePos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static io.github.kaifox.gsi.demo.client.conf.Constants.HOST;
-import static io.github.kaifox.gsi.demo.client.conf.Constants.HTTP_PORT;
+import static io.github.kaifox.gsi.demo.client.conf.ConfigValues.HOST;
 import static org.minifx.workbench.domain.PerspectivePos.CENTER;
 import static org.minifx.workbench.domain.PerspectivePos.RIGHT;
 
@@ -28,7 +25,7 @@ public class TestingClientConfiguration {
     @Autowired
     private List<TuneReceiver> receivers;
 
-    private TestControlClient testControlClient = WebfluxTestControlClient.fromLocation(HOST, HTTP_PORT);
+    private TestControlClient testControlClient = WebfluxTestControlClient.fromLocation(HOST, ConfigValues.httpPort());
 
     @View(in = TestControlPerspective.class, at = RIGHT, enforceTab = true)
     @Name("settings")

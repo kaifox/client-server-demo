@@ -2,7 +2,7 @@ package io.github.kaifox.gsi.demo.client.mains.rest;
 
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
-import io.github.kaifox.gsi.demo.client.conf.Constants;
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
 import io.github.kaifox.gsi.demo.client.views.FluxTunesView;
 import io.github.kaifox.gsi.demo.client.views.PollingTuneView;
 import io.github.kaifox.gsi.demo.client.views.SettingsView;
@@ -16,11 +16,11 @@ import org.springframework.core.annotation.Order;
 @Configuration
 public class WebfluxClientConfiguration {
 
-    private final TuneControlClient tuneControlClient = WebfluxTuneControlClient.fromLocation(Constants.HOST, Constants.HTTP_PORT);
+    private final TuneControlClient tuneControlClient = WebfluxTuneControlClient.fromLocation(ConfigValues.HOST, ConfigValues.httpPort());
 
     @Bean
     public TuneReceiver webfluxTuneReceiver() {
-        return WebfluxTuneReceiver.fromLocation(Constants.HOST, Constants.HTTP_PORT);
+        return WebfluxTuneReceiver.fromLocation(ConfigValues.HOST, ConfigValues.httpPort());
     }
 
     @View(in = WebfluxPerspective.class)

@@ -1,7 +1,7 @@
 package io.github.kaifox.gsi.demo.client.mains.ws;
 
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
-import io.github.kaifox.gsi.demo.client.conf.Constants;
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
 import io.github.kaifox.gsi.demo.client.views.FluxTunesView;
 import javafx.scene.Node;
 import org.minifx.workbench.annotations.Name;
@@ -14,7 +14,7 @@ public class WebsocketClientConfiguration {
 
     @Bean
     public TuneReceiver websocketTuneReceiver() {
-        return WebsocketTuneReceiver.fromLocation(Constants.HOST, Constants.HTTP_PORT);
+        return WebsocketTuneReceiver.fromLocation(ConfigValues.HOST, ConfigValues.httpPort());
     }
 
     @View(in = WebsocketPerspective.class, enforceTab = true)

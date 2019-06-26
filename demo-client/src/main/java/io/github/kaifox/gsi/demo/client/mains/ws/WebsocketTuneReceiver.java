@@ -1,7 +1,7 @@
 package io.github.kaifox.gsi.demo.client.mains.ws;
 
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
-import io.github.kaifox.gsi.demo.client.conf.Constants;
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import io.github.kaifox.gsi.demo.commons.util.JsonConversions;
 import org.slf4j.Logger;
@@ -56,8 +56,8 @@ public class WebsocketTuneReceiver implements TuneReceiver {
         try {
             WebSocketSession session = a.get();
             LOGGER.info("Successfully connected to websocket {} with id {}", uri, session.getId());
-            session.setBinaryMessageSizeLimit(Constants.ONE_GIGABYTE);
-            session.setTextMessageSizeLimit(Constants.ONE_GIGABYTE);
+            session.setBinaryMessageSizeLimit(ConfigValues.ONE_GIGABYTE);
+            session.setTextMessageSizeLimit(ConfigValues.ONE_GIGABYTE);
         } catch (Exception e) {
             LOGGER.error("Cannot reconnect to {}: {}", uri, e.getMessage());
             throw new IllegalStateException("Cannot connect to " + uri, e);
