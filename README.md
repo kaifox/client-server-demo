@@ -209,7 +209,11 @@ wsTune.onmessage = (msg) => {
 
 ### gRPC
 
-WIP
+Work in progress
+
+NOTE:
+> The tests on this technology was paused for the moment,
+> as the progress on starting with gRPC web was taking too long for the moment.
 
 Notes to get started with gRPC development: 
 [grpc-develop.md](demo-server/grpc/grpc-develop.md)
@@ -264,6 +268,35 @@ As a summary: All the three technologies (in the given setup) seem to perform ve
 The reduction in update frequency seems to be mainly dominated by some constant overhead per publication (0.2ms), 
 which of course is more visible at higher update rates. 
 
+
+### Pros and Cons
+
+__Pure Rest__
+
+(+) get/set <br>
+(-) no notification 
+(+) standard technology<br>
+
+__Webflux__
+(+) get/set <br>
+(+) notification through SSE
+(+) SSE reconnect nicely in web (java to be sorted out)
+(+) standard technologies (http+SSE), available and easy to implement in many languages
+(+) fits well the device/property model
+
+__Websockets__
+(+) get/set/notification <br>
+(-) endpoints to be known at implementation time
+
+__gRPC__
+(+) in principle all features <br>
+(+?) generated code/stubs <br>
+(-) setting up code generation is brittle
+(-) complex system in web (additional proxy needed). Tricky to set up.
+(-) Every developer needs special setup (code generation, proxy)
+(-) Not straight forward to debug (e.g. no standard protocol in browser)
+
+(*) Is code generation worth it? Usually we anyhow convert to internal domain objects right afterwards. 
 
 ### ossgang-properties
 
