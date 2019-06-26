@@ -32,3 +32,8 @@ javafx {
 application {
     mainClassName = 'io.github.kaifox.gsi.demo.client.mains.all.AllClientMain'
 }
+
+run {
+    /* Pass on selected system properties */
+    systemProperty "server.port", System.getProperty("server.port")
+}

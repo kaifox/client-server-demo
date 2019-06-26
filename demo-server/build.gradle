@@ -30,3 +30,8 @@ ext.pomExtraInfo = {}
 application {
     mainClassName = 'io.github.kaifox.gsi.demo.server.mains.all.AllServerMain'
 }
+
+run {
+    /* Pass on selected system properties */
+    systemProperty "server.port", System.getProperty("server.port")
+}
