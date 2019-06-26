@@ -27,13 +27,17 @@ chmod a+x ./gradlew
 #### Maven
 
 Important note: 
-> The included pom files are generated from the gradle dependencies. Please never edit the poms by hand,
-> but change the build.gradle files and regenerate the pom files using
+> The included pom files are NOT automatically generated from the gradle dependencies. 
+> Instead, they have to be kept in sync manually. To bootstrap big changes in deps, the 
+> 'updatePom' task can be used, which will create files 'pom-generated.xml', from which 
+> can then be copied by hand into pom.xml.
 
 ```
 ./gradlew updatePom
 ```
 
+(Originally, the plan was to generate the full poms, without any manual editing. However, 
+this turned out to be too much effort to set up properly ... therefore this intermediate solution.)
 ##### running with maven
 
 To run the server using maven, from the command line, one has to change into the server 
