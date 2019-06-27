@@ -1,6 +1,5 @@
 package io.github.kaifox.gsi.demo.calc.chroma.simulate;
 
-import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.ReplayProcessor;
 import reactor.core.scheduler.Schedulers;
@@ -8,6 +7,7 @@ import reactor.core.scheduler.Schedulers;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
@@ -25,6 +25,7 @@ public class PublicationSimulator<T> {
     private final ExecutorService publishExecutor = Executors.newCachedThreadPool();
     private final AtomicReference<T> actualValue = new AtomicReference<>();
     private final AtomicLong sleepTimeInMillis = new AtomicLong(1000);
+    private final AtomicBoolean periodicPublicationEnabled = new AtomicBoolean(true);
 
     private final ReplayProcessor<T> sink = ReplayProcessor.cacheLast();
     private final Flux<T> stream = sink.publishOn(Schedulers.elastic()).share();
@@ -56,11 +57,29 @@ public class PublicationSimulator<T> {
 
     private void periodicallyPublish() {
         while (true) {
-            T value = supplier.get();
-            actualValue.set(value);
-            publishExecutor.submit(() -> publish(value));
-            sleepUnchecked(sleepTimeInMillis.get());
+            if (periodicPublicationEnabled.get()) {
+                T value = updateValue();
+                publishExecutor.submit(() -> publish(value));
+                sleepUnchecked(sleepTimeInMillis.get());
+            }
         }
+    }
+
+    private T updateValue() {
+        T value = supplier.get();
+        actualValue.set(value);
+        return value;
+    }
+
+    public void triggerBurst(int numberOfPublications) {
+        publishExecutor.submit(() -> {
+            for (int i = 0; i < numberOfPublications; i++) {
+                publishExecutor.submit(() -> {
+                    T value = updateValue();
+                    publish(value);
+                });
+            }
+        });
     }
 
     private void publish(T value) {
@@ -73,6 +92,14 @@ public class PublicationSimulator<T> {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean getPeriodicPublicationEnabled() {
+        return this.periodicPublicationEnabled.get();
+    }
+
+    public void setPeriodicPublicationEnabled(boolean enabled) {
+        this.periodicPublicationEnabled.set(enabled);
     }
 
 }

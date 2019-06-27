@@ -36,4 +36,21 @@ public class TestingRestController {
         payloadSimulator.setLength(payloadLength);
     }
 
+
+    @GetMapping("/periodicPublicationEnabled")
+    public boolean getPeriodicPublicationEnabled() {
+        return publicationSimulator.getPeriodicPublicationEnabled();
+    }
+
+    @PostMapping("/periodicPublicationEnabled/{enabled}")
+    public void setPeriodicPublicationEnabled(@PathVariable("enabled") boolean enabled) {
+        publicationSimulator.setPeriodicPublicationEnabled(enabled);
+    }
+
+
+    @PostMapping("/triggerBurst/{numberOfPublications}")
+    public void triggerBurst(@PathVariable("numberOfPublications") int numberOfPublications) {
+        publicationSimulator.triggerBurst(numberOfPublications);
+    }
+
 }
