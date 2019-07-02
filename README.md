@@ -80,7 +80,7 @@ for the client to use (see above gradle examples).
 
 Example Code for the RestController:
 ```java
-// Fro gets
+// For gets
 @GetMapping("/standardDev")
 public double getTuneStandardDev() {
 // whatsoever
