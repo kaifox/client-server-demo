@@ -246,6 +246,24 @@ The following table shows the approximate payload lengths, where the demanded pu
 | Websockets | &tilde; 65k  | &tilde; 160k  | &tilde; 400k |
 | Webflux    | &tilde; 55k  | &tilde; 140k  | &tilde; 350k |
 
+
+This translates into (estimated) data rates as follows:
+
+| Tech       | 25 Hz demand | 10 Hz demand  | 4 Hz demand  |  
+| ----       | ------------ | ------------- | -----------  | 
+| gRPC       | &tilde; 80 MB/s | &tilde; 32 MB/s  | &tilde; 32 MB/s | 
+| Websockets | &tilde; 13 MB/s  | &tilde; 12.8 MB/s  | &tilde; 12.8 MB/s |
+| Webflux    | &tilde; 11 MB/s  | &tilde; 11.2 MB/s  | &tilde; 11.2 MB/s |
+
+So in summary, from we can expect:
+
+| Tech       | data rate  |  
+| ----       | ------------ |  
+| gRPC       | __&tilde; 32 MB/s__ |  
+| Websockets | __&tilde; 13 MB/s__  | 
+| Webflux    | __&tilde; 11 MB/s__  | 
+
+
 **DISCLAIMER**
 > These tests were done on a setup with both, client and server running on the same machine.
 > No tuning or optimization on any of the technologies was done. 
