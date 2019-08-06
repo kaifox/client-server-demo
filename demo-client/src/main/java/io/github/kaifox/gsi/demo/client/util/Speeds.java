@@ -25,7 +25,11 @@ public final class Speeds {
 
     public static final Flux<Double> emissionSpeedInHz(Flux<?> fluxToMeasure) {
         Flux<List<Atom>> buffer = bufferedAtoms(fluxToMeasure);
-        return buffer.map(atoms -> averageSpeedInHz(arrivalTimes(atoms)));
+        return buffer.map(atoms -> emissionSpeedInHz(atoms));
+    }
+
+    public static double emissionSpeedInHz(List<Atom> atoms) {
+        return averageSpeedInHz(arrivalTimes(atoms));
     }
 
     private static List<Instant> arrivalTimes(List<Atom> inst) {
@@ -41,25 +45,32 @@ public final class Speeds {
     }
 
     private static Flux<List<Atom>> bufferedAtoms(Flux fluxToMeasure, int windowSize) {
-        return (Flux<List<Atom>>) fluxToMeasure
-                .publishOn(Schedulers.elastic())
-                .map(v -> new Atom(sizeInMB(v), Instant.now()))
+        return (Flux<List<Atom>>) atoms(fluxToMeasure)
                 .buffer(windowSize).onBackpressureLatest();
     }
 
+    public static Flux<Atom> atoms(Flux fluxToMeasure) {
+        return fluxToMeasure
+                .publishOn(Schedulers.elastic()).onBackpressureDrop()
+                .map(v -> new Atom(sizeInMB(v), Instant.now()));
+    }
 
-    private static double megabytePerSecond(List<Atom> atoms) {
+
+    public static double megabytePerSecond(List<Atom> atoms) {
         if (atoms.size() < 2) {
             LOGGER.warn("Not enough atoms available (min 2) to calc rate. Returning 0 MB/s.");
             return 0;
         }
         double sum = sumMegabytes(atoms);
-        double delayInSeconds = totalDelayInMillis(arrivalTimes(atoms)) / 1000.0;
 
-        return sum / delayInSeconds;
+        return sum / totalDelayInSeconds(atoms);
     }
 
-    private static double sumMegabytes(List<Atom> atoms) {
+    public static double totalDelayInSeconds(List<Atom> atoms) {
+        return totalDelayInMillis(arrivalTimes(atoms)) / 1000.0;
+    }
+
+    public static double sumMegabytes(List<Atom> atoms) {
         return atoms.stream()
                 .mapToDouble(a -> a.sizeInMB)
                 .sum();
@@ -87,7 +98,7 @@ public final class Speeds {
     }
 
 
-    private static class Atom {
+    public static class Atom {
         private final double sizeInMB;
         private final Instant arrivalTime;
 

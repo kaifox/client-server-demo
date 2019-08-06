@@ -1,5 +1,9 @@
 package io.github.kaifox.gsi.demo.calc.chroma.simulate;
 
+import io.github.kaifox.gsi.demo.commons.domain.BurstEvent;
+import org.yaml.snakeyaml.emitter.Emitter;
+import org.yaml.snakeyaml.emitter.EmitterException;
+import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.ReplayProcessor;
 import reactor.core.scheduler.Schedulers;
@@ -27,8 +31,18 @@ public class PublicationSimulator<T> {
     private final AtomicLong sleepTimeInMillis = new AtomicLong(1000);
     private final AtomicBoolean periodicPublicationEnabled = new AtomicBoolean(true);
 
+    private final ReplayProcessor<Boolean> periodicEnabledSink = ReplayProcessor.cacheLast();
+    private final Flux<Boolean> periodicEnabledStream = periodicEnabledSink.publishOn(Schedulers.elastic()).share();
+
+    {
+        periodicEnabledSink.onNext(periodicPublicationEnabled.get());
+    }
+
     private final ReplayProcessor<T> sink = ReplayProcessor.cacheLast();
     private final Flux<T> stream = sink.publishOn(Schedulers.elastic()).share();
+
+    private final EmitterProcessor<Integer> burstStartSizeSink = EmitterProcessor.create();
+    private final Flux<Integer> burstStartSizes = burstStartSizeSink.publishOn(Schedulers.elastic()).share();
 
     private PublicationSimulator(Supplier<T> supplier) {
         this.supplier = Objects.requireNonNull(supplier, "supplier must not be null");
@@ -73,6 +87,8 @@ public class PublicationSimulator<T> {
 
     public void triggerBurst(int numberOfPublications) {
         publishExecutor.submit(() -> {
+            burstStartSizeSink.onNext(numberOfPublications);
+            sleepUnchecked(500);
             for (int i = 0; i < numberOfPublications; i++) {
                 publishExecutor.submit(() -> {
                     T value = updateValue();
@@ -94,12 +110,18 @@ public class PublicationSimulator<T> {
         }
     }
 
-    public boolean getPeriodicPublicationEnabled() {
-        return this.periodicPublicationEnabled.get();
+
+    public Flux<Boolean> periodicPublicationEnabled() {
+        return periodicEnabledStream;
+    }
+
+    public Flux<Integer> burstStartSizes() {
+        return this.burstStartSizes;
     }
 
     public void setPeriodicPublicationEnabled(boolean enabled) {
         this.periodicPublicationEnabled.set(enabled);
+        this.periodicEnabledSink.onNext(enabled);
     }
 
 }

@@ -12,7 +12,6 @@ import reactor.core.publisher.Flux;
 import javax.annotation.PostConstruct;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 import static io.github.kaifox.gsi.demo.client.util.Speeds.emissionSpeedInHz;
 
