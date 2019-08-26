@@ -132,6 +132,8 @@ $.get("http://" + location.host + "/standardDev", msg => {
 * Easy for variable number of endpoints
 * Seems to reconnect automatically in javascript (not in java!?)
 
+[Some other doc](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events)
+
 A RestController method in spring would look somehow like this:
 ```java
 @GetMapping(value = "/measuredTunes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
