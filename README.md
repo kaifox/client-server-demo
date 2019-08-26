@@ -208,6 +208,7 @@ wsTune.onmessage = (msg) => {
 }
 ```
 
+
 ### gRPC
 
 Work in progress
@@ -218,6 +219,50 @@ NOTE:
 
 Notes to get started with gRPC development: 
 [grpc-develop.md](demo-server/grpc/grpc-develop.md)
+
+### REST + SSE in python
+
+As a first try to check the effort of interacting a with other languages, python was tested amongst others.
+The server code + some description can be found [here](./python-server). 
+This implementation was written using [flask](https://palletsprojects.com/p/flask/).
+The relevant code looks somehow like this:
+
+```python
+# Conversion stuff
+
+def json_response(obj):
+    return Response(json.dumps(obj), mimetype='application/json')
+
+def sse_response(iterator):
+    return Response(('data: {0}\n\n'.format(json.dumps(o)) for o in iterator), mimetype='text/event-stream')
+
+def empty_response():
+    return Response("{}", mimetype='application/json')
+
+# Endpoints
+
+@app.route("/api/measuredTune")
+def measured_tune():
+    return json_response(tuneDto())
+
+@app.route("/api/measuredTunes")
+def measured_tunes():
+    return sse_response(tunes())
+
+@app.route("/api/standardDev")
+def standard_dev():
+    return json_response(simulator.get_std_def())
+
+@app.route("/api/standardDev/<stddev>", methods=["POST"])
+def set_standard_dev(stddev):
+    simulator.set_std_dev(float(stddev))
+    return empty_response()
+
+@app.route("/")
+def root():
+    return app.send_static_file("index.html")
+``` 
+
 
 ## Performance comparison
 

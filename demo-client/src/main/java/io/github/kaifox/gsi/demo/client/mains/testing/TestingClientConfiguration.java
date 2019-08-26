@@ -10,6 +10,7 @@ import org.minifx.workbench.annotations.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import reactor.core.publisher.Flux;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import static org.minifx.workbench.domain.PerspectivePos.CENTER;
 import static org.minifx.workbench.domain.PerspectivePos.RIGHT;
 
 @Configuration
+@Profile("testing")
 public class TestingClientConfiguration {
 
     @Autowired
