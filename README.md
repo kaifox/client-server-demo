@@ -225,7 +225,7 @@ Notes to get started with gRPC development:
 ### REST + SSE in python
 
 As a first try to check the effort of interacting a with other languages, python was tested amongst others.
-The server code + some description can be found [here](./python-server). 
+The server code + some description can be found [here](./python/python-server). 
 This implementation was written using [flask](https://palletsprojects.com/p/flask/).
 The relevant code looks somehow like this:
 
@@ -265,6 +265,43 @@ def root():
     return app.send_static_file("index.html")
 ``` 
 
+Corresponding Python Client code (which also works with the webflux server), can be found [here](./python/python-client).
+The relevant code part looks somehow like:
+
+```python
+def api_url(path):
+    return "http://localhost:8080/api" + path;
+
+
+def sse_stream(path):
+    resp = requests.get(api_url(path), stream=True)
+    return map(lambda e: json.loads(e.data), sseclient.SSEClient(resp).events())
+
+
+def get(path):
+    result = requests.get(api_url(path))
+    return result.json()
+
+
+def post(path):
+    requests.post(api_url(path))
+
+
+# API access
+
+def get_tune():
+    tune = get("/measuredTune")
+    print("measured tune from get: ", tune)
+
+
+def set_stddev(stddev):
+    print("setting stddev to {}.".format(stddev))
+    post("/standardDev/" + str(stddev))
+
+
+def get_tunes():
+    return sse_stream("/measuredTunes")
+```
 
 ## Performance comparison
 
