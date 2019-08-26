@@ -303,6 +303,13 @@ def get_tunes():
     return sse_stream("/measuredTunes")
 ```
 
+### C++ REST and SSE?
+
+Ongoing work!
+
+Potential library candidates:
+* http://pistache.io/
+
 ## Performance comparison
 
 The demo project contains some simple utilities to probe the transportation capabilities of the different technologies.
