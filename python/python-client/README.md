@@ -14,4 +14,8 @@ The client goes per default to `http://localhost:8080`. It is a simple text clie
 which twice sets the standard deviation and then subscribes to the SSE stream, limiting the
 amount to 10 updates.
 
+This version uses the following libraries:
+
+* [requests](https://2.python-requests.org/en/master/) for the standard http calls.
+* [sseclient-py](https://github.com/mpetazzoni/sseclient) in combination with the requests lib for streaming server sent events.
  
