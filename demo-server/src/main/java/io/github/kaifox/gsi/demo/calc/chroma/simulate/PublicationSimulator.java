@@ -1,13 +1,5 @@
 package io.github.kaifox.gsi.demo.calc.chroma.simulate;
 
-import io.github.kaifox.gsi.demo.commons.domain.BurstEvent;
-import org.yaml.snakeyaml.emitter.Emitter;
-import org.yaml.snakeyaml.emitter.EmitterException;
-import reactor.core.publisher.EmitterProcessor;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.ReplayProcessor;
-import reactor.core.scheduler.Schedulers;
-
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -15,6 +7,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
+
+import reactor.core.publisher.EmitterProcessor;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.ReplayProcessor;
+import reactor.core.scheduler.Schedulers;
 
 /**
  * Very simple helper class to simulate periodic publications. It simply calls periodically a
@@ -66,7 +63,7 @@ public class PublicationSimulator<T> {
     }
 
     public static <T> PublicationSimulator<T> generatedBy(Supplier<T> supplier) {
-        return new PublicationSimulator<T>(supplier);
+        return new PublicationSimulator<>(supplier);
     }
 
     private void periodicallyPublish() {
