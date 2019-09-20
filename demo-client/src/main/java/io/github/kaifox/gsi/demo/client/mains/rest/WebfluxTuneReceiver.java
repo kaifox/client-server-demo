@@ -1,12 +1,13 @@
 package io.github.kaifox.gsi.demo.client.mains.rest;
 
+import static java.util.Objects.requireNonNull;
+
+import org.springframework.web.reactive.function.client.WebClient;
+
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
-
-import static java.util.Objects.requireNonNull;
 
 public class WebfluxTuneReceiver implements TuneReceiver {
 

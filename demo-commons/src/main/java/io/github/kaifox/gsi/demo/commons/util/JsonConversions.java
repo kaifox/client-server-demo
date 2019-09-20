@@ -4,12 +4,12 @@
 
 package io.github.kaifox.gsi.demo.commons.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import static java.lang.Double.parseDouble;
 
 import java.lang.reflect.Type;
 
-import static java.lang.Double.parseDouble;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public final class JsonConversions {
 

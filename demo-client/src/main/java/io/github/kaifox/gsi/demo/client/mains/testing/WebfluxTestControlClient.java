@@ -1,12 +1,11 @@
 package io.github.kaifox.gsi.demo.client.mains.testing;
 
-import io.github.kaifox.gsi.demo.commons.domain.Tune;
-import org.springframework.web.bind.annotation.GetMapping;
+import static java.util.Objects.requireNonNull;
+
 import org.springframework.web.reactive.function.client.WebClient;
+
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
-
-import static java.util.Objects.requireNonNull;
 
 public class WebfluxTestControlClient implements TestControlClient {
     private final WebClient client;

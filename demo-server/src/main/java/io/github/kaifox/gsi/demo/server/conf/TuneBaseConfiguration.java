@@ -1,11 +1,12 @@
 package io.github.kaifox.gsi.demo.server.conf;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.PayloadSimulator;
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class TuneBaseConfiguration {

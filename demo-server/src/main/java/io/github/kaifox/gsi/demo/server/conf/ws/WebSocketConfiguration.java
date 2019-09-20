@@ -1,8 +1,7 @@
 package io.github.kaifox.gsi.demo.server.conf.ws;
 
-import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
-import io.github.kaifox.gsi.demo.commons.domain.Tune;
-import io.github.kaifox.gsi.demo.commons.util.JsonConversions;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.TextMessage;
@@ -12,7 +11,9 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import java.io.IOException;
+import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
+import io.github.kaifox.gsi.demo.commons.domain.Tune;
+import io.github.kaifox.gsi.demo.commons.util.JsonConversions;
 
 @Configuration
 @EnableWebSocket

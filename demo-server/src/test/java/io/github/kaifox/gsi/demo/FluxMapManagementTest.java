@@ -1,11 +1,12 @@
 package io.github.kaifox.gsi.demo;
 
-import org.junit.Test;
-import reactor.core.Disposable;
-import reactor.core.publisher.Flux;
-
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+
+import org.junit.Test;
+
+import reactor.core.Disposable;
+import reactor.core.publisher.Flux;
 
 public class FluxMapManagementTest {
 

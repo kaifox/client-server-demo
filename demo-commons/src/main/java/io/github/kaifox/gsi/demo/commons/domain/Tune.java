@@ -1,13 +1,11 @@
 package io.github.kaifox.gsi.demo.commons.domain;
 
-import com.google.common.collect.ImmutableList;
+import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
 
 public class Tune {
 

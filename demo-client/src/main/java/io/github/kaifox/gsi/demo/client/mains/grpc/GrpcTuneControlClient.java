@@ -1,5 +1,7 @@
 package io.github.kaifox.gsi.demo.client.mains.grpc;
 
+import java.util.Objects;
+
 import de.gsi.demoservice.grpc.MeasuredTuneReply;
 import de.gsi.demoservice.grpc.MeasuredTuneRequest;
 import de.gsi.demoservice.grpc.StandardDevRequest;
@@ -8,8 +10,6 @@ import de.gsi.demoservice.grpc.TuneServiceGrpc.TuneServiceBlockingStub;
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import io.grpc.Channel;
-
-import java.util.Objects;
 
 public class GrpcTuneControlClient implements TuneControlClient {
 

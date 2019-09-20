@@ -1,13 +1,14 @@
 package io.github.kaifox.gsi.demo.client.mains.ws;
 
-import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
-import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
-import io.github.kaifox.gsi.demo.client.views.FluxTunesView;
-import javafx.scene.Node;
 import org.minifx.workbench.annotations.Name;
 import org.minifx.workbench.annotations.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
+import io.github.kaifox.gsi.demo.client.views.FluxTunesView;
+import javafx.scene.Node;
 
 @Configuration
 public class WebsocketClientConfiguration {

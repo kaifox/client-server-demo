@@ -1,24 +1,25 @@
 package io.github.kaifox.gsi.demo.client.mains.testing;
 
-import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
-import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
-import io.github.kaifox.gsi.demo.client.views.BurstSpeedView;
-import io.github.kaifox.gsi.demo.client.views.ReceptionSpeedView;
-import io.github.kaifox.gsi.demo.client.views.TestingSettingsView;
+import static org.minifx.workbench.domain.PerspectivePos.CENTER;
+import static org.minifx.workbench.domain.PerspectivePos.RIGHT;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.minifx.workbench.annotations.Name;
 import org.minifx.workbench.annotations.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
+import io.github.kaifox.gsi.demo.client.views.BurstSpeedView;
+import io.github.kaifox.gsi.demo.client.views.ReceptionSpeedView;
+import io.github.kaifox.gsi.demo.client.views.TestingSettingsView;
 import reactor.core.publisher.Flux;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import static org.minifx.workbench.domain.PerspectivePos.CENTER;
-import static org.minifx.workbench.domain.PerspectivePos.RIGHT;
 
 @Configuration
 @Profile("testing")

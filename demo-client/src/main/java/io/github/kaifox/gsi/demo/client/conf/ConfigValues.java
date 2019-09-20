@@ -1,9 +1,9 @@
 package io.github.kaifox.gsi.demo.client.conf;
 
+import java.util.function.Function;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.function.Function;
 
 public final class ConfigValues {
 

@@ -1,14 +1,13 @@
 package io.github.kaifox.gsi.demo.client.views;
 
+import static java.util.Objects.requireNonNull;
+
+import javax.annotation.PostConstruct;
+
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-
-import javax.annotation.PostConstruct;
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
 
 public class PollingTuneView extends BorderPane {
 

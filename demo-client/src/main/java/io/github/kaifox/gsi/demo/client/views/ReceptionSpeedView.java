@@ -1,5 +1,12 @@
 package io.github.kaifox.gsi.demo.client.views;
 
+import static io.github.kaifox.gsi.demo.client.util.Speeds.emissionSpeedInHz;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+
 import io.github.kaifox.gsi.demo.client.util.Speeds;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -8,12 +15,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import reactor.core.publisher.Flux;
-
-import javax.annotation.PostConstruct;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import static io.github.kaifox.gsi.demo.client.util.Speeds.emissionSpeedInHz;
 
 public class ReceptionSpeedView extends HBox {
 

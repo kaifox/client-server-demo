@@ -1,9 +1,9 @@
 package io.github.kaifox.gsi.demo.calc.chroma.simulate;
 
-import com.google.common.util.concurrent.AtomicDouble;
-
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
+
+import com.google.common.util.concurrent.AtomicDouble;
 
 /**
  * This is a modified version of the simulator used in the LHC chroma app. However, this one is not relying on tensors

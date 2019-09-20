@@ -1,13 +1,14 @@
 package io.github.kaifox.gsi.demo;
 
-import reactor.core.publisher.Flux;
-
-import javax.annotation.concurrent.GuardedBy;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import javax.annotation.concurrent.GuardedBy;
+
+import reactor.core.publisher.Flux;
 
 /**
  * This is just a conceptual try, to see how one could  share streams if possible, but also clean up whenever none of

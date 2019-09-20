@@ -1,5 +1,10 @@
 package io.github.kaifox.gsi.demo.client.views;
 
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javax.annotation.PostConstruct;
+
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import javafx.application.Platform;
 import javafx.scene.control.CheckBox;
@@ -8,10 +13,6 @@ import javafx.scene.layout.BorderPane;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
-
-import javax.annotation.PostConstruct;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FluxTunesView extends BorderPane {
 

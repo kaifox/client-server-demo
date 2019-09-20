@@ -1,5 +1,13 @@
 package io.github.kaifox.gsi.demo.client.mains.grpc;
 
+import static io.github.kaifox.gsi.demo.client.conf.ConfigValues.ONE_GIGABYTE;
+
+import org.minifx.workbench.annotations.Name;
+import org.minifx.workbench.annotations.View;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
 import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
@@ -9,13 +17,6 @@ import io.github.kaifox.gsi.demo.client.views.SettingsView;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
 import javafx.scene.Node;
-import org.minifx.workbench.annotations.Name;
-import org.minifx.workbench.annotations.View;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-
-import static io.github.kaifox.gsi.demo.client.conf.ConfigValues.ONE_GIGABYTE;
 
 @Configuration
 public class GrpcClientConfiguration {

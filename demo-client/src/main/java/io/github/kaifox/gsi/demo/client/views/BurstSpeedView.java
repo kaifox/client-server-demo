@@ -1,5 +1,12 @@
 package io.github.kaifox.gsi.demo.client.views;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+
 import io.github.kaifox.gsi.demo.client.util.Speeds;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
@@ -7,12 +14,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import reactor.core.publisher.Flux;
-
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class BurstSpeedView extends HBox {
 

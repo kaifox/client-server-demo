@@ -1,5 +1,14 @@
 package io.github.kaifox.gsi.demo.client.views;
 
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.github.kaifox.gsi.demo.client.mains.testing.TestControlClient;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
@@ -9,13 +18,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.PostConstruct;
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class TestingSettingsView extends BorderPane {
 

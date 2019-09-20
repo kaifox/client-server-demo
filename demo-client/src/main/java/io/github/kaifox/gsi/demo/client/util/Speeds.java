@@ -1,19 +1,21 @@
 package io.github.kaifox.gsi.demo.client.util;
 
-import com.google.common.collect.Iterables;
-import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
-import org.openjdk.jol.info.GraphLayout;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import reactor.core.publisher.Flux;
-import reactor.core.scheduler.Schedulers;
+import static java.util.stream.Collectors.toList;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
+import org.openjdk.jol.info.GraphLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Iterables;
+
+import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
+import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
 public final class Speeds {
 

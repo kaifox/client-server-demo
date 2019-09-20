@@ -1,5 +1,9 @@
 package io.github.kaifox.gsi.demo.server.conf.grpc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import de.gsi.demoservice.grpc.MeasuredTuneReply;
 import de.gsi.demoservice.grpc.MeasuredTuneRequest;
 import de.gsi.demoservice.grpc.StandardDevReply;
@@ -9,9 +13,6 @@ import io.github.kaifox.gsi.demo.calc.chroma.simulate.ChromaSimulator;
 import io.github.kaifox.gsi.demo.calc.chroma.simulate.PublicationSimulator;
 import io.github.kaifox.gsi.demo.commons.domain.Tune;
 import io.grpc.stub.StreamObserver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class GrpcTuneService extends TuneServiceImplBase {
 

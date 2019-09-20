@@ -1,16 +1,18 @@
 package io.github.kaifox.gsi.demo.client.views;
 
+import java.util.Objects;
+
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.PostConstruct;
-import java.util.Objects;
 
 public class SettingsView extends BorderPane {
 

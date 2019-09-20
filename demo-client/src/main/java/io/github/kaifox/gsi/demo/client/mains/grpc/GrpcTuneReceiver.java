@@ -1,5 +1,7 @@
 package io.github.kaifox.gsi.demo.client.mains.grpc;
 
+import java.util.Objects;
+
 import de.gsi.demoservice.grpc.MeasuredTuneReply;
 import de.gsi.demoservice.grpc.MeasuredTuneRequest;
 import de.gsi.demoservice.grpc.TuneServiceGrpc;
@@ -10,8 +12,6 @@ import io.grpc.stub.StreamObserver;
 import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
-
-import java.util.Objects;
 
 public class GrpcTuneReceiver implements TuneReceiver {
 

@@ -1,11 +1,12 @@
 package io.github.kaifox.gsi.demo.client.mains.all;
 
+import org.minifx.workbench.MiniFx;
+
 import io.github.kaifox.gsi.demo.client.conf.CommonGuiConfiguration;
 import io.github.kaifox.gsi.demo.client.mains.grpc.GrpcClientConfiguration;
 import io.github.kaifox.gsi.demo.client.mains.rest.WebfluxClientConfiguration;
 import io.github.kaifox.gsi.demo.client.mains.testing.TestingClientConfiguration;
 import io.github.kaifox.gsi.demo.client.mains.ws.WebsocketClientConfiguration;
-import org.minifx.workbench.MiniFx;
 
 
 public class AllClientMain {

@@ -1,5 +1,11 @@
 package io.github.kaifox.gsi.demo.client.mains.rest;
 
+import org.minifx.workbench.annotations.Name;
+import org.minifx.workbench.annotations.View;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+
 import io.github.kaifox.gsi.demo.client.api.TuneControlClient;
 import io.github.kaifox.gsi.demo.client.api.TuneReceiver;
 import io.github.kaifox.gsi.demo.client.conf.ConfigValues;
@@ -7,11 +13,6 @@ import io.github.kaifox.gsi.demo.client.views.FluxTunesView;
 import io.github.kaifox.gsi.demo.client.views.PollingTuneView;
 import io.github.kaifox.gsi.demo.client.views.SettingsView;
 import javafx.scene.Node;
-import org.minifx.workbench.annotations.Name;
-import org.minifx.workbench.annotations.View;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 
 @Configuration
 public class WebfluxClientConfiguration {

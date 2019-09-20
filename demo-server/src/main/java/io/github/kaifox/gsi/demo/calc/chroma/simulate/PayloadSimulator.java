@@ -1,10 +1,10 @@
 package io.github.kaifox.gsi.demo.calc.chroma.simulate;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static java.util.stream.Collectors.toList;
 
 public class PayloadSimulator {
 
