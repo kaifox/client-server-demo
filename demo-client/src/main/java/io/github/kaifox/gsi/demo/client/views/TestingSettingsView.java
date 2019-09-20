@@ -1,7 +1,9 @@
 package io.github.kaifox.gsi.demo.client.views;
 
 import io.github.kaifox.gsi.demo.client.mains.testing.TestControlClient;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
@@ -15,22 +17,22 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class TestSettingsView extends BorderPane {
+public class TestingSettingsView extends BorderPane {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(TestSettingsView.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(TestingSettingsView.class);
 
     private final TestControlClient testControlClient;
 
-    public TestSettingsView(TestControlClient tuneControlClient) {
+    public TestingSettingsView(TestControlClient tuneControlClient) {
         this.testControlClient = Objects.requireNonNull(tuneControlClient);
     }
 
     @PostConstruct
     public void init() {
-        setCenter(new VBox(publicationDelayPane(), payloadLengthPane()));
+        setCenter(new VBox(publicationDelayPane(), payloadLengthPane(), burstPane()));
     }
 
-    private TitledPane publicationDelayPane() {
+    private VBox publicationDelayPane() {
         Supplier<String> supplier = () -> new Long(testControlClient.getDelayInMillis()).toString();
         Consumer<String> consumer = s -> {
             try {
@@ -41,13 +43,27 @@ public class TestSettingsView extends BorderPane {
             }
         };
 
-        VBox content = getSetContent(supplier, consumer);
-        return new TitledPane("publication delay in millis", content);
+
+        CheckBox periodicEnabled = new CheckBox("Periodic publication");
+        testControlClient.periodicPublicationEnabled()
+                .subscribe(b -> Platform.runLater(() -> periodicEnabled.setSelected(b)));
+
+        periodicEnabled.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            testControlClient.setPeriodicPublicationEnabled(newValue);
+        });
+
+
+        TitledPane periodicDelayPane = new TitledPane("publication delay in millis", getSetContent(supplier, consumer));
+
+        testControlClient.periodicPublicationEnabled().subscribe(e -> Platform.runLater(() -> periodicDelayPane.setDisable(!e)));
+
+        VBox content = new VBox(periodicEnabled, periodicDelayPane);
+        return content;
     }
 
 
     private TitledPane payloadLengthPane() {
-        Supplier<String> supplier = () -> new Long(testControlClient.getPayloadLength()).toString();
+        Supplier<String> supplier = () -> new Integer(testControlClient.getPayloadLength()).toString();
         Consumer<String> consumer = s -> {
             try {
                 int val = Integer.parseInt(s);
@@ -59,6 +75,21 @@ public class TestSettingsView extends BorderPane {
 
         VBox content = getSetContent(supplier, consumer);
         return new TitledPane("payload length", content);
+    }
+
+    private TitledPane burstPane() {
+        TextField textField = new TextField();
+        textField.setText("1");
+
+        Button setButton = new Button("trigger");
+        setButton.setOnAction(evt -> {
+            int iterations = Integer.parseInt(textField.getText());
+            testControlClient.triggerBurst(iterations);
+        });
+
+        TitledPane burstPane = new TitledPane("Burst", new VBox(textField, setButton));
+        testControlClient.periodicPublicationEnabled().subscribe(e -> Platform.runLater(() -> burstPane.setDisable(e)));
+        return burstPane;
     }
 
 

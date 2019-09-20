@@ -52,6 +52,7 @@ subprojects {
     dependencies {
         compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
         compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+        compile 'org.openjdk.jol:jol-core:0.9'
 
         testCompile group: 'junit', name: 'junit', version: jUnitVersion
         testCompile group: 'org.assertj', name: 'assertj-core', version: assertJVersion

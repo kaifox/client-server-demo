@@ -18,7 +18,7 @@ public class FluxTunesView extends BorderPane {
     private static final Scheduler FX_THREAD = Schedulers.fromExecutor(Platform::runLater);
 
     private final Flux<Tune> inFlux;
-    private final AtomicBoolean update = new AtomicBoolean(true);
+    private final AtomicBoolean update = new AtomicBoolean(false);
 
     public FluxTunesView(Flux<Tune> inFlux) {
         this.inFlux = Objects.requireNonNull(inFlux, "inFlux must not be null.");

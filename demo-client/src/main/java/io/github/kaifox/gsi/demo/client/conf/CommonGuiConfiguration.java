@@ -9,7 +9,7 @@ public class CommonGuiConfiguration {
 
     @Bean
     public MiniFxSceneBuilder miniFxSceneBuilder() {
-        return MiniFxSceneBuilder.miniFxSceneBuilder().withSize(640, 380);
+        return MiniFxSceneBuilder.miniFxSceneBuilder().withSize(640, 450);
     }
 
 }

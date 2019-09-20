@@ -2,15 +2,18 @@ package io.github.kaifox.gsi.demo.commons.domain;
 
 import com.google.common.collect.ImmutableList;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 public class Tune {
 
     private final double value;
     private final double error;
-    private final List<Double> payload;
+    private final double[] payload;
 
     public Tune() {
         this(0.0, 0.0);
@@ -23,7 +26,7 @@ public class Tune {
     public Tune(double value, double error, List<Double> payload) {
         this.value = value;
         this.error = error;
-        this.payload = ImmutableList.copyOf(payload);
+        this.payload = payload.stream().mapToDouble(v -> v).toArray();
     }
 
 
@@ -36,7 +39,7 @@ public class Tune {
     }
 
     public List<Double> getPayload() {
-        return this.payload;
+        return Arrays.stream(this.payload).mapToObj(v -> v).collect(toList());
     }
 
 
@@ -60,7 +63,7 @@ public class Tune {
         return "Tune{" +
                 "value=" + value +
                 ", error=" + error +
-                ", payload=" + payload +
+                ", payloadSize=" + payload.length + " doubles" +
                 '}';
     }
 }

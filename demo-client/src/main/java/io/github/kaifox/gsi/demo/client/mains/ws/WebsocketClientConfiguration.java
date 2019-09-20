@@ -14,7 +14,7 @@ public class WebsocketClientConfiguration {
 
     @Bean
     public TuneReceiver websocketTuneReceiver() {
-        return WebsocketTuneReceiver.fromLocation(ConfigValues.HOST, ConfigValues.httpPort());
+        return WebsocketTuneReceiver.fromLocation(ConfigValues.host(), ConfigValues.httpPort());
     }
 
     @View(in = WebsocketPerspective.class, enforceTab = true)

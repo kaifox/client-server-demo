@@ -13,19 +13,19 @@ From within the top directory, start the server by:
 ```
 ./gradlew :demo-server:run
 ```
-Optionally, you can adjust the server (http) port by calling
+Optionally, you can adjust the server (http) and the grpc port by calling
 ```
-./gradlew :demo-server:run -D"server.port"=9090
+./gradlew :demo-server:run -D"server.port"=9090 -D"grpc.port"=5353
 ```
-This will set the port to 9090 (default would be 8080).
+This will set the port to 9090 (default would be 8080), and grpc port to 5353 (default would be 5252).
 
 and to start the client (javafx gui), type:
 ```
 ./gradlew :demo-client:run
 ```
-Optionally, you can adjust the server (http) port by calling
+Optionally, you can adjust the server (http) port, server host and grpc port by calling
 ```
-./gradlew :demo-client:run -D"server.port"=9090
+./gradlew :demo-client:run -D"server.port"=9090 -D"server.host"=somehost -D"grpc.port"=5353
 ```
 This will set the port to 9090 (default would be 8080).
 
@@ -70,7 +70,8 @@ development machine. In this case, e.g. the port 9090 could be specified like th
 ```
 mvn exec:java -D"server.port"="9090"
 ```
-(The quotes (") are only required on windows machines)
+(The quotes (") are only required on windows machines). Also the grpc port can be adjusted as well as the server-host
+for the client to use (see above gradle examples).
 
 
 ### Pure REST
@@ -79,7 +80,7 @@ mvn exec:java -D"server.port"="9090"
 
 Example Code for the RestController:
 ```java
-// Fro gets
+// For gets
 @GetMapping("/standardDev")
 public double getTuneStandardDev() {
 // whatsoever
@@ -130,6 +131,8 @@ $.get("http://" + location.host + "/standardDev", msg => {
 * Works nicely out of the box. The browser shows some nice updates immediately.
 * Easy for variable number of endpoints
 * Seems to reconnect automatically in javascript (not in java!?)
+
+[Some other doc](https://html.spec.whatwg.org/multipage/server-sent-events.html#server-sent-events)
 
 A RestController method in spring would look somehow like this:
 ```java
@@ -207,12 +210,105 @@ wsTune.onmessage = (msg) => {
 }
 ```
 
+
 ### gRPC
 
-WIP
+Work in progress
+
+NOTE:
+> The tests on this technology was paused for the moment,
+> as the progress on starting with gRPC web was taking too long for the moment.
 
 Notes to get started with gRPC development: 
 [grpc-develop.md](demo-server/grpc/grpc-develop.md)
+
+### REST + SSE in python
+
+As a first try to check the effort of interacting a with other languages, python was tested amongst others.
+The server code + some description can be found [here](./python/python-server). 
+This implementation was written using [flask](https://palletsprojects.com/p/flask/).
+The relevant code looks somehow like this:
+
+```python
+# Conversion stuff
+
+def json_response(obj):
+    return Response(json.dumps(obj), mimetype='application/json')
+
+def sse_response(iterator):
+    return Response(('data: {0}\n\n'.format(json.dumps(o)) for o in iterator), mimetype='text/event-stream')
+
+def empty_response():
+    return Response("{}", mimetype='application/json')
+
+# Endpoints
+
+@app.route("/api/measuredTune")
+def measured_tune():
+    return json_response(tuneDto())
+
+@app.route("/api/measuredTunes")
+def measured_tunes():
+    return sse_response(tunes())
+
+@app.route("/api/standardDev")
+def standard_dev():
+    return json_response(simulator.get_std_def())
+
+@app.route("/api/standardDev/<stddev>", methods=["POST"])
+def set_standard_dev(stddev):
+    simulator.set_std_dev(float(stddev))
+    return empty_response()
+
+@app.route("/")
+def root():
+    return app.send_static_file("index.html")
+``` 
+
+Corresponding Python Client code (which also works with the webflux server), can be found [here](./python/python-client).
+The relevant code part looks somehow like:
+
+```python
+def api_url(path):
+    return "http://localhost:8080/api" + path;
+
+
+def sse_stream(path):
+    resp = requests.get(api_url(path), stream=True)
+    return map(lambda e: json.loads(e.data), sseclient.SSEClient(resp).events())
+
+
+def get(path):
+    result = requests.get(api_url(path))
+    return result.json()
+
+
+def post(path):
+    requests.post(api_url(path))
+
+
+# API access
+
+def get_tune():
+    tune = get("/measuredTune")
+    print("measured tune from get: ", tune)
+
+
+def set_stddev(stddev):
+    print("setting stddev to {}.".format(stddev))
+    post("/standardDev/" + str(stddev))
+
+
+def get_tunes():
+    return sse_stream("/measuredTunes")
+```
+
+### C++ REST and SSE?
+
+Ongoing work!
+
+Potential library candidates:
+* http://pistache.io/
 
 ## Performance comparison
 
@@ -241,6 +337,24 @@ The following table shows the approximate payload lengths, where the demanded pu
 | Websockets | &tilde; 65k  | &tilde; 160k  | &tilde; 400k |
 | Webflux    | &tilde; 55k  | &tilde; 140k  | &tilde; 350k |
 
+
+This translates into (estimated) data rates as follows:
+
+| Tech       | 25 Hz demand | 10 Hz demand  | 4 Hz demand  |  
+| ----       | ------------ | ------------- | -----------  | 
+| gRPC       | &tilde; 80 MB/s | &tilde; 32 MB/s  | &tilde; 32 MB/s | 
+| Websockets | &tilde; 13 MB/s  | &tilde; 12.8 MB/s  | &tilde; 12.8 MB/s |
+| Webflux    | &tilde; 11 MB/s  | &tilde; 11.2 MB/s  | &tilde; 11.2 MB/s |
+
+So in summary, from we can expect:
+
+| Tech       | data rate  |  
+| ----       | ------------ |  
+| gRPC       | __&tilde; 32 MB/s__ |  
+| Websockets | __&tilde; 13 MB/s__  | 
+| Webflux    | __&tilde; 11 MB/s__  | 
+
+
 **DISCLAIMER**
 > These tests were done on a setup with both, client and server running on the same machine.
 > No tuning or optimization on any of the technologies was done. 
@@ -264,6 +378,35 @@ As a summary: All the three technologies (in the given setup) seem to perform ve
 The reduction in update frequency seems to be mainly dominated by some constant overhead per publication (0.2ms), 
 which of course is more visible at higher update rates. 
 
+
+### Pros and Cons
+
+__Pure Rest__
+
+(+) get/set <br>
+(-) no notification 
+(+) standard technology<br>
+
+__Webflux__
+(+) get/set <br>
+(+) notification through SSE
+(+) SSE reconnect nicely in web (java to be sorted out)
+(+) standard technologies (http+SSE), available and easy to implement in many languages
+(+) fits well the device/property model
+
+__Websockets__
+(+) get/set/notification <br>
+(-) endpoints to be known at implementation time
+
+__gRPC__
+(+) in principle all features <br>
+(+?) generated code/stubs <br>
+(-) setting up code generation is brittle
+(-) complex system in web (additional proxy needed). Tricky to set up.
+(-) Every developer needs special setup (code generation, proxy)
+(-) Not straight forward to debug (e.g. no standard protocol in browser)
+
+(*) Is code generation worth it? Usually we anyhow convert to internal domain objects right afterwards. 
 
 ### ossgang-properties
 

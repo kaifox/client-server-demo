@@ -6,11 +6,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import reactor.core.publisher.Flux;
 
 import javax.annotation.PostConstruct;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static io.github.kaifox.gsi.demo.client.util.Speeds.emissionSpeedInHz;
 
 public class ReceptionSpeedView extends HBox {
 
@@ -28,8 +31,16 @@ public class ReceptionSpeedView extends HBox {
     }
 
     private static Node measureNodeFor(String name, Flux<?> flux) {
-        Label label = new Label("Not yet calculated");
-        Speeds.emissionSpeedInHz(flux).subscribe(v -> Platform.runLater(() -> label.setText(String.format("%.2f Hz", v))));
-        return new TitledPane(name, label);
+        Label frequencyLabel = doubleLabel(emissionSpeedInHz(flux), "%.2f Hz");
+        Label megabyteLabel = doubleLabel(Speeds.megabytePerSecond(flux), "%.2f MB/s");
+
+        VBox vBox = new VBox(frequencyLabel, megabyteLabel);
+        return new TitledPane(name, vBox);
+    }
+
+    private static Label doubleLabel(Flux<Double> doubleFlux, String formatString) {
+        Label frequencyLabel = new Label("Not yet calculated");
+        doubleFlux.subscribe(v -> Platform.runLater(() -> frequencyLabel.setText(String.format(formatString, v))));
+        return frequencyLabel;
     }
 }

@@ -1,5 +1,4 @@
 
-Highcharts.setOptions({ global: { useUTC: false } });
 function parseJSON(msg) {
 	return JSON.parse(msg.data.replace(/(NaN|Infinity)/ig, null));
 }
@@ -46,32 +45,7 @@ $('#setStandardDevButton').click(e => {
 	$.post("http://" + location.host + "/api/standardDev/" + v);
 })
 
-/**
- * The following subscribes to websockets on the server.
- */
 
-var wsTune = new WebSocket("ws://" + location.host + "/ws/measuredTunes");
-wsTune.onmessage = (msg) => {
-	$('#wsTune').text('from WS: ' + msg.data);
-}
-
-
-/**
- * gRPC part
- */
-
-const { MeasuredTuneRequest, MeasuredTuneReply, StandardDevRequest, StandardDevReply } = require('./tune_pb.js');
-const { TuneServiceClient } = require('./tune_grpc_web_pb.js');
-
-var tuneService = new TuneServiceClient('http://localhost:5353');
-
-
-$('#grpcGetTuneButton').click(e => {
-	var request = new proto.demo.MeasuredTuneRequest();
-	tuneService.getMeasuredTune(request, {}, (err, response) => {
-		console.log(response);
-	});
-})
 
 
 
